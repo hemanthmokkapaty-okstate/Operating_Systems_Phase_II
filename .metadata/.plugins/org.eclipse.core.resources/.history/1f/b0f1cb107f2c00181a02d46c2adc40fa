@@ -1,0 +1,49 @@
+package operatingsystems;
+
+import java.io.*;
+import java.util.*;
+import java.util.Scanner;
+import java.lang.*;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
+
+
+public class DISK extends SYSTEM
+{
+public static int Input_Words;
+public static int Output_words;
+
+public static String[] lines = new String[10000];
+public static int i =0;
+
+public static Scanner readLines;
+public void openFile()
+{
+	try
+	{
+		readLines = new Scanner(new File(FileName));
+	}
+	catch(Exception e)
+	{
+		System.out.println("File not Found");
+	}
+}
+	
+
+public static void ReadFile()
+{
+	while(readLines.hasNext())
+	{
+		lines[i] = readLines.nextLine();
+		System.out.println(lines[i]);
+		i++;
+	}
+}
+
+public void closeFile()
+{
+	readLines.close();
+}
+}

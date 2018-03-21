@@ -71,7 +71,17 @@ public class SYSTEM {
 	}
 	return binary;
 	}
-	
+	public static String Hex_to_Bin_16_bit(String hex)
+	{
+	int decimal = Integer.parseInt(hex,16);    
+	String binary = Integer.toBinaryString(decimal);
+	//Pad 0's to make the length of the string to 8
+	while(binary.length()<16)
+	{
+		binary = "0"+binary;
+	}
+	return binary;
+	}
 	////Method to convert Decimal number to binary number
 	public static String Dec_to_Bin_16_bit(int Dec)
 	{
@@ -215,7 +225,16 @@ public class SYSTEM {
 		 }
 	//Main Method
 	public static void main(String[] args) {
-        FileName = "/Users/hemanth/Desktop/OS_II/OS_II_Phase2/Encryption_hexa.txt";
+        FileName = "/Users/hemanth/Desktop/Encryption_hexa2.txt";
+        DISK disk = new DISK();
+        disk.openFile();
+        disk.ReadFile();
+        disk.closeFile();
+        disk.variableLoading();
+        disk.HexLoad();
+        disk.Segment_Loading();
+        disk.Input_Spooling();
+        disk.Disk_Segmenting();
         LOADER loader = new LOADER();
 		// TODO Auto-generated method stub
 		loader.HexLoad();

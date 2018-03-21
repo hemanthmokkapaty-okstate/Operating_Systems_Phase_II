@@ -1,0 +1,16 @@
+package operatingsystems;
+
+public class DISK extends SYSTEM
+{
+public static int Input_Words;
+public static int Output_words;
+
+public static String[] lines = new String[10000];
+
+
+	
+	
+	
+	
+	
+}
