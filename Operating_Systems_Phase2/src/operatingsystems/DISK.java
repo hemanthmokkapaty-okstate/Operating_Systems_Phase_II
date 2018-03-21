@@ -47,12 +47,10 @@ public static void ReadFile()
 	}
 }
 
-public void closeFile()
+public static void closeFile()
 {
 	readLines.close();
 }
-
-
 
 public static void variableLoading()
 {
@@ -136,8 +134,6 @@ public static void HexLoad()
 		//System.out.println(BIN[l]);
 		l++;
 	}
-	
-	
 }
 
 

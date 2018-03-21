@@ -32,6 +32,10 @@ public class SYSTEM {
 	public static int PC;
 	public static int Program_length;
 	public static int Effective_Address;
+	public static int Page_Index=0;
+	public static int Frame_Index=0;	
+	public static int Page_Number=0;
+	public static int Frame_Number=0;
 	public static String Instruction_Register;
 	public static String FileName;
 	public static int System_Clock = 0;
@@ -237,9 +241,12 @@ public class SYSTEM {
         disk.Disk_Segmenting();
         LOADER loader = new LOADER();
 		// TODO Auto-generated method stub
-		loader.HexLoad();
+	
 		MEMORY memory = new MEMORY();
-		memory.Buffer_Loading(Base_Address,Base_Address);
+		//memory.Buffer_Loading(Base_Address,Base_Address)
+		PCB pcb = new PCB();
+		pcb.FMBV_Initialize();
+		loader.First_Page_Loading();
 		CPU cpu = new CPU();
 		CPU.CPU(PC,Trace_Flag);
 	}

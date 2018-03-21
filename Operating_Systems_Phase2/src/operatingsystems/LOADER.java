@@ -20,6 +20,117 @@ import java.util.*;
 //LOADER class that loads the data from the File System
 public class LOADER extends SYSTEM {
  
+	
+	
+	LOADER()
+	{
+		
+	}
+	
+	
+	public static void First_Page_Loading()
+	{
+		Page_Number = (PC/8)+1;
+		System.out.println("Page_Number:"+Page_Number);
+		Page_Index = (PC/8)*8;
+		System.out.println("Page_Index:"+Page_Index);
+		
+		int fmbv_index =0;
+		while(PCB.FMBV[fmbv_index]!=true)
+		{
+			fmbv_index++;
+		}
+		fmbv_index = fmbv_index +1;
+		Frame_Number = fmbv_index;
+		Frame_Index = fmbv_index*8;
+		System.out.println("Frame_Number:"+Frame_Number);
+		System.out.println("Frame_Index:"+Frame_Index);	
+		
+		for(int i=0;i<8;i++)
+		{
+			MEMORY.MEM[Frame_Index] = DISK.DISK[Page_Index];
+			Frame_Index++;
+			Page_Index++;
+		}
+		PCB.FMBV[fmbv_index-1] = false;
+		
+		for(int i=0;i<100;i++)
+		{
+			System.out.println(i+" "+MEMORY.MEM[i]);
+		}
+		 for(int i =0;i<32;i++)
+			{
+				System.out.println(i+" "+PCB.FMBV[i]);
+			}	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	//ArrayList to store the each line of the input job
 	public static ArrayList<String> lines = new ArrayList<String>();
 	// ArrayList to store the hexadecimal format of numbers
@@ -126,7 +237,7 @@ public class LOADER extends SYSTEM {
 			BIN.add(first_word+second_word);
 		}	
 	}
-	
+*/	
 		 
 	}
 	

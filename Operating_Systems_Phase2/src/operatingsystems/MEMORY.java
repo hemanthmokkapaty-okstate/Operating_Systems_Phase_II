@@ -19,7 +19,6 @@ import java.io.IOException;
 //Main Memory Class
 public class MEMORY extends SYSTEM 
 {
-	
 	public static String Z;
 	//MEMORY Constructor
 	MEMORY()
@@ -28,6 +27,7 @@ public class MEMORY extends SYSTEM
 	}
 	//Main Memory with size 256 words
 	public static String[] MEM = new String[256];
+	
 	//A Memory Buffer of Size 4
 	public static String[] Buffer = new String[4];
 	public static int BIN_INDEX =0;
@@ -35,6 +35,59 @@ public class MEMORY extends SYSTEM
 	public static int MEM_INDEX =0;
 	public static int REDUCED_MEM_INDEX =0;
 
+	
+	
+	
+}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	//Load the elements from loader into the buffer
 	public void Buffer_Loading(int bin_index,int mem_index)
 	{
@@ -93,8 +146,8 @@ public class MEMORY extends SYSTEM
 			System.out.println(MEM[i]);
 		}
 	}	
-	
-}
+	*/
+
 
 
 

@@ -1,4 +1,3 @@
                   BEFORE EXECUTION         AFTER EXECUTION
  PC    IR   BR    TOS  S[TOS] EA    EA_val TOS  S[TOS] EA    EA_val
 (Hex) (Hex)(Hex) (Hex) (Hex)  (Hex) (Hex) (Hex) (Hex)  (Hex) (Hex)  
-0b    0013   00   00                        00                    

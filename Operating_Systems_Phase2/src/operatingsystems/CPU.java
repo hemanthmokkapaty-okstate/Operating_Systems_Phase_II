@@ -67,7 +67,7 @@ public static void CPU(int X,int Y)
 	try
 	{
 	
-	Instruction_Register=MEMORY.MEMORY("READ",X,null);	
+	Instruction_Register=MEMORY.MEM[X];
 	Instruction_Type_T = Instruction_Register.substring(0, 1);
 	
 	//Condition for Suspected Infinite loop
@@ -1067,7 +1067,7 @@ public static void ONE_RTN()
 public static void ONE_PUSH()
 {
 	TOS = TOS+1;
-	Stack[TOS] = MEMORY.MEMORY("READ",Effective_Address,null);
+	Stack[TOS] = MEMORY.MEM[Effective_Address];
 	PC = PC +1;
 	try{printtrace();}
 	catch(Exception e){
