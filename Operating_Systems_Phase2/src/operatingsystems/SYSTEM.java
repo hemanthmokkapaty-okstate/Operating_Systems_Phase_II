@@ -36,6 +36,7 @@ public class SYSTEM {
 	public static int Frame_Index=0;	
 	public static int Page_Number=0;
 	public static int Frame_Number=0;
+	public static int Total_Frames;
 	public static String Instruction_Register;
 	public static String FileName;
 	public static int System_Clock = 0;
@@ -245,7 +246,11 @@ public class SYSTEM {
 		MEMORY memory = new MEMORY();
 		//memory.Buffer_Loading(Base_Address,Base_Address)
 		PCB pcb = new PCB();
-		pcb.FMBV_Initialize();
+		//pcb.FMBV_Initialize();
+		FMBV fmbv = new FMBV();
+		fmbv.FMBV_Initialize();
+		//SMT smt = new SMT();
+		//PMT pmt = new PMT();
 		loader.First_Page_Loading();
 		CPU cpu = new CPU();
 		CPU.CPU(PC,Trace_Flag);

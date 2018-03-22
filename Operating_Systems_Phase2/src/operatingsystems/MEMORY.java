@@ -28,6 +28,7 @@ public class MEMORY extends SYSTEM
 	//Main Memory with size 256 words
 	public static String[] MEM = new String[256];
 	
+	
 	//A Memory Buffer of Size 4
 	public static String[] Buffer = new String[4];
 	public static int BIN_INDEX =0;

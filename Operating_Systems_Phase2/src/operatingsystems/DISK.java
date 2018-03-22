@@ -17,6 +17,7 @@ public static int Output_Words;
 public static int Program_Segment_Length;
 public static int Input_Start_Index;
 public static int Output_Start_Index;
+public static int Total_Pages;
 public static String[] DISK = new String[2048];
 public static String[] lines = new String[1000];
 public static String[] HD = new String[1000];

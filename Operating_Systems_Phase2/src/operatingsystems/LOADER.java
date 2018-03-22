@@ -36,7 +36,7 @@ public class LOADER extends SYSTEM {
 		System.out.println("Page_Index:"+Page_Index);
 		
 		int fmbv_index =0;
-		while(PCB.FMBV[fmbv_index]!=true)
+		while(FMBV.FMBV[fmbv_index]!=true)
 		{
 			fmbv_index++;
 		}
@@ -52,16 +52,28 @@ public class LOADER extends SYSTEM {
 			Frame_Index++;
 			Page_Index++;
 		}
-		PCB.FMBV[fmbv_index-1] = false;
+		FMBV.FMBV[fmbv_index-1] = false;
 		
 		for(int i=0;i<100;i++)
 		{
 			System.out.println(i+" "+MEMORY.MEM[i]);
 		}
-		 for(int i =0;i<32;i++)
-			{
-				System.out.println(i+" "+PCB.FMBV[i]);
-			}	
+		 
+		for(int i =0;i<32;i++)
+		{
+		System.out.println(i+" "+FMBV.FMBV[i]);
+		}	
+		
+		Total_Frames = Math.min(6, (DISK.Program_Segment_Length)+2);
+		System.out.println("Total Frames needed:"+Total_Frames);
+		PMT[] pmt1 = new PMT[Total_Frames];
+		pmt1[0] = new PMT(Page_Number,Frame_Number,true,false);
+		
+		System.out.println("Page map table values:"+pmt1[0].page_no+ " "+pmt1[0].frame_no+" "+pmt1[0].ref_bit+" "+pmt1[0].dirty_bit);
+		SMT[] segment_map_table = new SMT[3];
+		segment_map_table[0] = new SMT(0,pmt1);
+		System.out.println("segment map table values:"+segment_map_table[0].segment_code+" "+segment_map_table[0].pmt_reference[0].page_no+" "+segment_map_table[0].pmt_reference[0].frame_no+" "+segment_map_table[0].pmt_reference[0].ref_bit+" "+segment_map_table[0].pmt_reference[0].dirty_bit);	
+		
 	}
 	
 	
