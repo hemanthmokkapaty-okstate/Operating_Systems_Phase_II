@@ -208,7 +208,7 @@ public static void Disk_Segmenting()
 	}
 	for(int i=0;i<Output_Start_Index;i++)
 	{
-		System.out.println(DISK[i]);
+		System.out.println(i+" "+DISK[i]);
 	}
 	
 }

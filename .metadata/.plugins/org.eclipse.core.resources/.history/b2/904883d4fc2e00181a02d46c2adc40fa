@@ -1,0 +1,6 @@
+package operatingsystems;
+
+public class SMT extends SYSTEM
+{
+
+}

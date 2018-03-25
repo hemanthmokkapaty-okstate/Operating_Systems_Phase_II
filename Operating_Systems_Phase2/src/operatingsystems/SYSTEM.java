@@ -31,11 +31,24 @@ public class SYSTEM {
 	public static int Trace_Flag;
 	public static int PC;
 	public static int Program_length;
-	public static int Effective_Address;
-	public static int Page_Index=0;
-	public static int Frame_Index=0;	
-	public static int Page_Number=0;
-	public static int Frame_Number=0;
+	public static int Effective_Address=0;
+	public static int Effective_Address_By_Frame;
+	public static int Page_Index;
+	public static int Frame_Index;
+	public static int Page_Number;
+	public static int Frame_Number;
+	public static int PC_Page_Index;
+	public static int PC_Frame_Index;
+	public static int PC_Page_Number;
+	public static int PC_Frame_Number;
+	public static int EA_Page_Index;
+	public static int EA_Frame_Index;
+	public static int EA_Page_Number;
+	public static int EA_Frame_Number;
+	public static int First_Page_Index;
+	public static int First_Frame_Index;	
+	public static int First_Page_Number;
+	public static int First_Frame_Number;
 	public static int Total_Frames;
 	public static String Instruction_Register;
 	public static String FileName;
@@ -252,6 +265,7 @@ public class SYSTEM {
 		//SMT smt = new SMT();
 		//PMT pmt = new PMT();
 		loader.First_Page_Loading();
+		
 		CPU cpu = new CPU();
 		CPU.CPU(PC,Trace_Flag);
 	}

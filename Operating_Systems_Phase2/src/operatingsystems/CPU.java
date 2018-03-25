@@ -34,6 +34,7 @@ public static String PC_Hex = "    ";
 public static String BR_Hex = "    ";
 public static String IR_Hex = "    ";
 public static Boolean flag=true;
+public static int CPU_Count=0;
 
 
 //Constructor for the CPU Class
@@ -45,6 +46,32 @@ CPU()
 //Parameterized CPU Constructor to take program counter and Trace switch as input values
 public static void CPU(int X,int Y)
 {	
+	System.out.println("No of Instructions Executed:"+(CPU_Count=CPU_Count+1));
+	System.out.println("PC Value:"+PC);
+	
+	
+	X = (LOADER.PC_Frame_Number*8) + (PC%8);
+	
+	
+ boolean page_fault_PC = true; 
+ boolean page_fault_EA = true; 
+	for(int pmt_index=0;pmt_index<DISK.Program_Segment_Length;pmt_index++)
+	{
+		
+		if(LOADER.pcb.smt[0].pmt.get(pmt_index).page_no == (PC/8) && LOADER.pcb.smt[0].pmt.get(pmt_index).valid_bit == 1)
+		{
+			page_fault_PC = false;
+		}
+		
+	}
+	
+	if(page_fault_PC == true)
+	{
+		LOADER.Page_Fault_Handling_PC(PC);
+		X = (LOADER.PC_Frame_Number*8) + (PC%8);
+	}
+	
+	
 	 try  {
 		 if(Trace_Flag==1){
 			 File f= new File(trace_file);
@@ -68,6 +95,7 @@ public static void CPU(int X,int Y)
 	{
 	
 	Instruction_Register=MEMORY.MEM[X];
+	System.out.println("Instruction Register value:"+Instruction_Register);
 	Instruction_Type_T = Instruction_Register.substring(0, 1);
 	
 	//Condition for Suspected Infinite loop
@@ -98,17 +126,18 @@ public static void CPU(int X,int Y)
 		String first_half = Instruction_Register.substring(0,8);
 		//Checks whether the first half of the value belongs to Type 0 or not
 		
-		PC_Hex = Dec_to_Hex(PC);
-		IR_Hex = Bin_to_Hex(Instruction_Register);
-		BR_Hex = Dec_to_Hex(Base_Address);
-		trace_TOS_bef = Dec_to_Hex(TOS);
+		//PC_Hex = Dec_to_Hex(PC);
+		//IR_Hex = Bin_to_Hex(Instruction_Register);
+		//BR_Hex = Dec_to_Hex(Base_Address);
+		//trace_TOS_bef = Dec_to_Hex(TOS);
+		/*
 		if(TOS==0){
 			trace_StackTOS_bef="    ";
 		}
 		else {
 			trace_StackTOS_bef= Bin_to_Hex(Stack[TOS]);
 		}
-		
+		*/
 		trace_EA_aft="  ";
 		trace_EA_bef="  ";
 		trace_MemEA_aft="    ";
@@ -255,25 +284,40 @@ public static void CPU(int X,int Y)
 			
 		}
 		
-		PC_Hex = Dec_to_Hex(PC);
-		IR_Hex = Bin_to_Hex(Instruction_Register);
-		BR_Hex = Dec_to_Hex(Base_Address);
-		trace_TOS_bef = Dec_to_Hex(TOS);
+		for(int i=0;i<DISK.Program_Segment_Length;i++)
+		{
+
+			if(LOADER.pcb.smt[0].pmt.get(i).page_no == (Effective_Address/8) && LOADER.pcb.smt[0].pmt.get(i).valid_bit == 1)
+			{
+				page_fault_EA = false;
+			}
+		}
+		if(page_fault_EA == true)
+		{
+			LOADER.Page_Fault_Handling_EA(Effective_Address);
+			Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
+		}
+		Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
+//		PC_Hex = Dec_to_Hex(PC);
+	//	IR_Hex = Bin_to_Hex(Instruction_Register);
+		//BR_Hex = Dec_to_Hex(Base_Address);
+		//trace_TOS_bef = Dec_to_Hex(TOS);
+		/*
 		if(TOS==0){
 			trace_StackTOS_bef="    ";
 		}
 		else {
-			trace_StackTOS_bef= Bin_to_Hex(Stack[TOS]);
+			//trace_StackTOS_bef= Bin_to_Hex(Stack[TOS]);
 		}
-		
-		trace_EA_bef=Dec_to_Hex(Effective_Address);
-		trace_MemEA_bef = Bin_to_Hex(MEMORY.MEM[Effective_Address]);
-		trace_EA_aft=Dec_to_Hex(Effective_Address);
-		trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);
+		*/
+		//trace_EA_bef=Dec_to_Hex(Effective_Address);
+		//trace_MemEA_bef = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
+		//trace_EA_aft=Dec_to_Hex(Effective_Address);
+		//trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
 		
 		//Initialize the opcode
 		Op_Code= Instruction_Register.substring(1,6);
-		
+		System.out.println("Op_Code Value:"+Op_Code);
 		switch(Op_Code)
 		{
 		case "00000": 
@@ -355,17 +399,19 @@ public static void CPU(int X,int Y)
 			ERROR_HANDLER.ERROR(5);
 		}
 		
-		trace_EA_aft= Dec_to_Hex(Effective_Address);
-		trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);
-		trace_TOS_aft= Dec_to_Hex(TOS);
+		//trace_EA_aft= Dec_to_Hex(Effective_Address);
+		//trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);
+		//trace_TOS_aft= Dec_to_Hex(TOS);
+		/*
 		if(TOS==0){trace_StackTOS_aft ="    ";}
 		else {
 			trace_StackTOS_aft = Bin_to_Hex(Stack[TOS]);
 		}
-		trace_TOS_aft = Dec_to_Hex(TOS);
-		 trace_StackTOS_aft = Bin_to_Hex(Stack[TOS]);
-		 trace_EA_aft = Dec_to_Hex(Effective_Address);
-		 trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);	
+		*/
+		//trace_TOS_aft = Dec_to_Hex(TOS);
+		 //trace_StackTOS_aft = Bin_to_Hex(Stack[TOS]);
+		 //trace_EA_aft = Dec_to_Hex(Effective_Address);
+		 //trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);	
 	}
 	
 	
@@ -680,10 +726,12 @@ public static void ZERO_RD()
 {
 	System_Clock = System_Clock +17;
 	IO_Clock = IO_Clock+15;
-	
-	Scanner scanner = new Scanner(System.in); 
+	//LOADER.Input_Loading();
+	//Scanner scanner = new Scanner(System.in); 
 	//Takes the input from the Keyboard
-	Input = scanner.nextLine();
+	//Input = scanner.nextLine();
+	Input = LOADER.Input_Loading();
+	System.out.println("Input value is:"+Input);
 	//Checks whether the Input is an integer or not
 	if(!Input.matches("(-?[0-9]+)"))
 	{
@@ -695,7 +743,7 @@ public static void ZERO_RD()
 	{
 		ERROR_HANDLER.ERROR(4);
 	}
-	String Bin_Input = Dec_to_Bin_16_bit(Input_Dec);
+	String Bin_Input = Input;
 	TOS = TOS+1;
 	Stack[TOS] = Bin_Input;
 	PC = PC+1;	
@@ -703,6 +751,7 @@ public static void ZERO_RD()
 	catch(Exception e){
 		
 	}
+	
 	CPU(PC,Trace_Flag);
 }
 //Method for Zero Address Write operation
@@ -733,6 +782,7 @@ public static void ZERO_RTN()
 	catch(Exception e){
 		
 	}
+	PC_Frame_Number = LOADER.pcb.smt[0].pmt.get(PC/8).frame_no;
 	CPU(PC,Trace_Flag);
 }
 //Method for Zero Address Push operation
@@ -782,9 +832,10 @@ int dec_Stack = Bin_to_Dec(Stack[TOS]);
 //Method for One Address AND operation
 public static void ONE_AND()
 {
-	int dec_Stack = Bin_to_Dec(Stack[TOS]);
+int dec_Stack = Bin_to_Dec(Stack[TOS]);
 	
-	int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	//int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address_By_Frame]);
 	
 	int And_value = (dec_Stack & dec_EA);
 	
@@ -796,6 +847,7 @@ public static void ONE_AND()
 	catch(Exception e){
 		
 	}
+	//PC_Frame_Number = LOADER.pcb.smt[0].pmt.get(PC/8).frame_no;
 	CPU(PC,Trace_Flag);
 }
 //Method for One Address NOT operation
@@ -834,7 +886,9 @@ public static void ONE_XOR()
 public static void ONE_ADD()
 {
 	int Stack_dec = Bin_to_Dec(Stack[TOS]);
-	int EA_dec = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
+	//int EA_dec = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	int EA_dec = Bin_to_Dec(MEMORY.MEM[Effective_Address_By_Frame]);
 	int Addition = Stack_dec + EA_dec;
 	String Addition_binary = Dec_to_Bin_16_bit(Addition);
 	Stack[TOS] = Addition_binary;
@@ -919,7 +973,8 @@ public static void ONE_SR()
 public static void ONE_CPG()
 {
 	int dec_stack = twosComplement(Stack[TOS]);
-	int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	//int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address_By_Frame]);
 	if(dec_stack > dec_EA)
 	{
 		Stack[TOS+1] = "0000000000000001";
@@ -944,7 +999,9 @@ public static void ONE_CPG()
 public static void ONE_CPL()
 {
 	int dec_stack = twosComplement(Stack[TOS]);	
-	int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
+	//int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address]);
+	int dec_EA = Bin_to_Dec(MEMORY.MEM[Effective_Address_By_Frame]);
 	if(dec_stack < dec_EA)
 	{
 		Stack[TOS+1] = "0000000000000001";
@@ -1009,6 +1066,7 @@ public static void ONE_BRT()
 //Method for One Address BRF operation
 public static void ONE_BRF()
 {
+	System.out.println("One BRF here");
 	if(Stack[TOS].equals("0000000000000000"))
 	{
 		PC = Effective_Address;
@@ -1040,6 +1098,8 @@ public static void ONE_CALL()
 	String pc_bin = Dec_to_Bin_16_bit(PC);
 	Stack[TOS] = pc_bin;
 	PC = Effective_Address;
+	PC_Frame_Index = EA_Frame_Index;
+	PC_Frame_Number = EA_Frame_Number;
 	try{printtrace();}
 	catch(Exception e){
 		
@@ -1067,7 +1127,8 @@ public static void ONE_RTN()
 public static void ONE_PUSH()
 {
 	TOS = TOS+1;
-	Stack[TOS] = MEMORY.MEM[Effective_Address];
+	//Stack[TOS] = MEMORY.MEM[Effective_Address];
+	Stack[TOS] = MEMORY.MEM[Effective_Address_By_Frame];
 	PC = PC +1;
 	try{printtrace();}
 	catch(Exception e){
@@ -1077,7 +1138,9 @@ public static void ONE_PUSH()
 }
 public static void ONE_POP()
 {
-	MEMORY.MEM[Effective_Address] = Stack[TOS];	
+	//MEMORY.MEM[Effective_Address] = Stack[TOS];	
+	MEMORY.MEM[Effective_Address_By_Frame] = Stack[TOS];	
+	//DISK.DISK[Effective_Address] = Stack[TOS];
 	Stack[TOS] = null;
 	TOS = TOS-1;
 	PC = PC+1;
