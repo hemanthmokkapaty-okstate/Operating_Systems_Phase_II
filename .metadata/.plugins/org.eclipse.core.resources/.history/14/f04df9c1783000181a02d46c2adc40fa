@@ -259,13 +259,12 @@ public class SYSTEM {
 		MEMORY memory = new MEMORY();
 		//memory.Buffer_Loading(Base_Address,Base_Address)
 		PCB pcb = new PCB();
-		
 		//pcb.FMBV_Initialize();
 		FMBV fmbv = new FMBV();
 		fmbv.FMBV_Initialize();
 		//SMT smt = new SMT();
 		//PMT pmt = new PMT();
-		LOADER.First_Page_Loading();
+		loader.First_Page_Loading();
 		
 		CPU cpu = new CPU();
 		CPU.CPU(PC,Trace_Flag);

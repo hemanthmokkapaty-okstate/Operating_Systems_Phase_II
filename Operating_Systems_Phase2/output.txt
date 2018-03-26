@@ -1,7 +1,7 @@
 Cumulative Job Identification number :1(DEC)
-Nature of termination : Abnormal
-Illegal Instruction Trap ,Stack Underflow
-Clock value at termination: 4 (HEX)virtual time units
+Nature of termination : Normal
+Output of the Job : null(BINARY)
+Clock value at termination: d2 (HEX)virtual time units
 Run time for the job
-Execution time: 4 (DECIMAL)virtual time units
-Input/output time: 0 (DECIMAL)virtual time units
+Execution time: 195(DECIMAL)virtual time units
+Input/output time: 15(DECIMAL)virtual time units

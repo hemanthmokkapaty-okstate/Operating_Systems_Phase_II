@@ -50,29 +50,15 @@ public static void CPU(int X,int Y)
 	System.out.println("PC Value:"+PC);
 	
 	
-	
+	X = (LOADER.PC_Frame_Number*8) + (PC%8);
 	
 	
  boolean page_fault_PC = true; 
  boolean page_fault_EA = true; 
- 
- 
- 
- 
- if (LOADER.pcb.smt[0].pmt.get(PC/8).frame_no==- 1)
-	 
- {
-	 // page fault handler
-	 LOADER.pagefault_PC(PC);
-	 
- }
- X = (LOADER.PC_Frame_Number*8) + (PC%8);
- 
- /*
 	for(int pmt_index=0;pmt_index<DISK.Program_Segment_Length;pmt_index++)
 	{
 		
-		if(LOADER.pcb.smt[0].pmt.get(pmt_index).page_no == (PC/8) && LOADER.pcb.smt[0].pmt.get(pmt_index).frame_no!=- 1)
+		if(LOADER.pcb.smt[0].pmt.get(pmt_index).page_no == (PC/8) && LOADER.pcb.smt[0].pmt.get(pmt_index).valid_bit == 1)
 		{
 			page_fault_PC = false;
 		}
@@ -85,7 +71,7 @@ public static void CPU(int X,int Y)
 		X = (LOADER.PC_Frame_Number*8) + (PC%8);
 	}
 	
-	*/
+	
 	 try  {
 		 if(Trace_Flag==1){
 			 File f= new File(trace_file);
@@ -297,7 +283,7 @@ public static void CPU(int X,int Y)
 			Effective_Address = d_address + Stack_Value;
 			
 		}
-		/*
+		
 		for(int i=0;i<DISK.Program_Segment_Length;i++)
 		{
 
@@ -311,15 +297,6 @@ public static void CPU(int X,int Y)
 			LOADER.Page_Fault_Handling_EA(Effective_Address);
 			Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
 		}
-		*/
-
-		 if (LOADER.pcb.smt[0].pmt.get(Effective_Address/8).frame_no==- 1)
-			 
-		 {
-			 // page fault handler
-			 LOADER.pagefaut_EA(Effective_Address);
-			 
-		 }
 		Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
 //		PC_Hex = Dec_to_Hex(PC);
 	//	IR_Hex = Bin_to_Hex(Instruction_Register);

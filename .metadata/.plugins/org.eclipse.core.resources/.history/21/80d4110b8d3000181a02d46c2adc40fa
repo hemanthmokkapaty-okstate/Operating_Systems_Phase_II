@@ -317,7 +317,7 @@ public static void CPU(int X,int Y)
 			 
 		 {
 			 // page fault handler
-			 LOADER.pagefaut_EA(Effective_Address);
+			 LOADER.pagefault(Effective_Address);
 			 
 		 }
 		Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);

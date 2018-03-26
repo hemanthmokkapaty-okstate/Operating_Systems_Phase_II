@@ -533,12 +533,6 @@ public class LOADER extends SYSTEM {
 	
 	public static int New_Calculated_Address(int address)
 	{
-		
-		int pagesize= address/8;
-		
-		EA_Frame_Number= LOADER.pcb.smt[0].pmt.get(pagesize).frame_no;
-		
-		
 		/*
 		for(int i=0;i<DISK.Program_Segment_Length;i++)
 		{
@@ -548,9 +542,8 @@ public class LOADER extends SYSTEM {
             EA_Frame_Number = LOADER.pcb.smt[0].pmt.get(i).frame_no;
 			}
 		}
+		
 		*/
-		
-		
 		int new_address = (EA_Frame_Number*8) + (address%8);
 		return new_address;
 	}
@@ -643,105 +636,26 @@ public class LOADER extends SYSTEM {
 			for(int j=0; j< pagesInMemory.size();j++)
 				
 			{
-				
+				if(LOADER.pcb.smt[0].pmt.get(pagesInMemory.get(j)).ref_bit==0)
 					
-				
+				{
 					
-					
-					
-					
-					if (pagesInMemory.get(j)> DISK.Program_Segment_Length-1)
-					{
-						int frame_value2= LOADER.pcb.smt[1].pmt.get(0).frame_no;
-						
-						LOADER.pcb.smt[0].pmt.get(PC_Page_Number).frame_no= frame_value2;
-						LOADER.pcb.smt[1].pmt.get(0).frame_no=-1;
-						
-						
-						
-						
-						
-						
-						
-						//copy to disk
-						
-						int diskAddress1;
-						int memoryAddress2;
-						
-						diskAddress1= pagesInMemory.get(j)*8;
-						memoryAddress2= frame_value2*8;
-						
-						for(int i=0; i<8;i++)
-						{
-							DISK.DISK[diskAddress1]= MEMORY.MEM[memoryAddress2]; 
-							memoryAddress2++;
-							diskAddress1++;
-						}
-						
-						
-						
-						memoryAddress= frame_value2*8;
-						diskAddress= PC_Page_Number*8;
-						
-						//copy to memory
-						for(int i=0; i<8;i++)
-						{
-							MEMORY.MEM[memoryAddress]= DISK.DISK[diskAddress]; 
-							memoryAddress++;
-							diskAddress++;
-						}
-						
-						//EA_Frame_Number= frame_value;
-						pagesInMemory.remove(j);
-						pagesInMemory.add(PC_Page_Number);
-						PC_Frame_Number = frame_value2;
-						
-						
-						
-						
-						
-						
-						
-					}
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-				else
-					
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				{	
 					//get frame nuber of first page of pages of memory
 					int frame_value= LOADER.pcb.smt[0].pmt.get(pagesInMemory.get(j)).frame_no;
 					// assign the frame number to PC_Page number
-					
 					LOADER.pcb.smt[0].pmt.get(PC_Page_Number).frame_no= frame_value;
-					LOADER.pcb.smt[0].pmt.get(pagesInMemory.get(j)).frame_no=-1;
+					//frame_value= LOADER.pcb.smt[0].pmt.get(j).frame_no=-1;
 					
 					
-					
+					pagesInMemory.remove(j);
+					pagesInMemory.add(PC_Page_Number);
 					
 					//copy to disk
 					
 					int diskAddress1;
 					int memoryAddress2;
 					
-					diskAddress1= pagesInMemory.get(j)*8;
+					diskAddress1= j*8;
 					memoryAddress2= frame_value*8;
 					
 					for(int i=0; i<8;i++)
@@ -765,20 +679,10 @@ public class LOADER extends SYSTEM {
 					}
 					
 					//EA_Frame_Number= frame_value;
-					
-					pagesInMemory.remove(j);
-					pagesInMemory.add(PC_Page_Number);
 					PC_Frame_Number = frame_value;
 					
-				}
-					
-					
-					
-					
-					
-					
 					j= pagesInMemory.size();
-				
+				}
 			}
 			
 			
@@ -847,7 +751,7 @@ public static void pagefaut_EA(int address)
 				int frame_value= LOADER.pcb.smt[0].pmt.get(pagesInMemory.get(j)).frame_no;
 				// assign the frame number to PC_Page number
 				LOADER.pcb.smt[0].pmt.get(PC_Page_Number).frame_no= frame_value;
-				 LOADER.pcb.smt[0].pmt.get(pagesInMemory.get(j)).frame_no=-1;
+				//frame_value= LOADER.pcb.smt[0].pmt.get(j).frame_no=-1;
 				
 				
 				pagesInMemory.remove(j);
@@ -858,7 +762,7 @@ public static void pagefaut_EA(int address)
 				int diskAddress1;
 				int memoryAddress2;
 				
-				diskAddress1= pagesInMemory.get(j)*8;
+				diskAddress1= j*8;
 				memoryAddress2= frame_value*8;
 				
 				for(int i=0; i<8;i++)

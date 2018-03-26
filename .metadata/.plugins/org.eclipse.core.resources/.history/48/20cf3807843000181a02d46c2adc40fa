@@ -59,11 +59,11 @@ public static void CPU(int X,int Y)
  
  
  
- if (LOADER.pcb.smt[0].pmt.get(PC/8).frame_no==- 1)
+ if (LOADER.pcb.smt[0].pmt.get(PC/8).frame_no!=- 1)
 	 
  {
 	 // page fault handler
-	 LOADER.pagefault_PC(PC);
+	 LOADER.pagefault(PC);
 	 
  }
  X = (LOADER.PC_Frame_Number*8) + (PC%8);
@@ -313,11 +313,11 @@ public static void CPU(int X,int Y)
 		}
 		*/
 
-		 if (LOADER.pcb.smt[0].pmt.get(Effective_Address/8).frame_no==- 1)
+		 if (LOADER.pcb.smt[0].pmt.get(Effective_Address/8).frame_no!=- 1)
 			 
 		 {
 			 // page fault handler
-			 LOADER.pagefaut_EA(Effective_Address);
+			 LOADER.pagefault(Effective_Address);
 			 
 		 }
 		Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
