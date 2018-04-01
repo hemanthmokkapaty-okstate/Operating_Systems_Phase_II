@@ -1,0 +1,33 @@
+package operatingsystems;
+
+import java.io.*;
+import java.util.*;
+import java.util.Scanner;
+import java.lang.*;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
+
+
+public class INPUT_SPOOLING extends SYSTEM
+{
+public static Scanner readLines;
+public static int linecount = 0;
+	
+public void openFile()
+{
+	try
+	{
+		readLines = new Scanner(new File(FileName));
+	}
+	catch(Exception e)
+	{
+		System.out.println("File not Found");
+	}
+}	
+	
+	
+	
+	
+}

@@ -1,0 +1,6 @@
+package operatingsystems;
+
+public class INPUT_SPOOLING extends SYSTEM
+{
+
+}

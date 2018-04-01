@@ -78,7 +78,7 @@ public class LOADER extends SYSTEM {
 		}
 		//FMBV.FMBV[fmbv_index-1] = false;
 		
-		Total_Frames = Math.min(6, (DISK.Program_Segment_Length)+2);
+		Total_Frames = Math.min(6, (INPUT_SPOOLING.Program_Segment_Length)+2);
 		System.out.println("Total Frames needed:"+Total_Frames);
 		//Page_Index = First_Page_Index;
 		PC_Page_Number = First_Page_Number;
@@ -86,7 +86,7 @@ public class LOADER extends SYSTEM {
 		PC_Frame_Number = frameNumber;
 		LOADER.pcb.smt[0] = new SMT();
 		
-		for(int i=0;i<DISK.Program_Segment_Length;i++)
+		for(int i=0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 		{
 			LOADER.pcb.smt[0].pmt.add(new PMT(i,-1,0,0,0));
 		}
@@ -109,7 +109,7 @@ public class LOADER extends SYSTEM {
 	
 	public static String Input_Loading()
 	{
-	int input_page_Index = DISK.Input_Start_Index;
+	int input_page_Index = INPUT_SPOOLING.Input_Start_Index;
 	//int fmbv_index =0;
 	int pageNumber1= input_page_Index/8;
 	
@@ -151,7 +151,7 @@ public class LOADER extends SYSTEM {
 	}	
 	LOADER.pcb.smt[1] = new SMT();	
 	LOADER.pcb.smt[1].pmt.add(new PMT(1,-1,0,0,0));
-	LOADER.pcb.smt[1].pmt.get(0).page_no =  DISK.Input_Start_Index/8;
+	LOADER.pcb.smt[1].pmt.get(0).page_no =  INPUT_SPOOLING.Input_Start_Index/8;
 	LOADER.pcb.smt[1].pmt.get(0).frame_no = frame_Number;
 	LOADER.pcb.smt[1].pmt.get(0).valid_bit = 1;
 	LOADER.pcb.smt[1].pmt.get(0).ref_bit = -1;
@@ -230,7 +230,7 @@ public class LOADER extends SYSTEM {
 			int frame_index = frame_number*8;
 			PC_Frame_Number = frame_number;
 			PC_Frame_Index = frame_index;
-			for(int i=0;i<DISK.Program_Segment_Length;i++)
+			for(int i=0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 			{
 				
 				if(LOADER.pcb.smt[0].pmt.get(i).frame_no== PC_Frame_Number)
@@ -270,7 +270,7 @@ public class LOADER extends SYSTEM {
 		
 		int temporary_page_index =0;
 		int temporary_frame_index = fmbv_index *8;
-		for(int i =0;i<DISK.Program_Segment_Length;i++)
+		for(int i =0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 		{
 			if(LOADER.pcb.smt[0].pmt.get(i).frame_no == frame_number)
 			{
@@ -295,7 +295,7 @@ public class LOADER extends SYSTEM {
 		PC_Frame_Number = frame_number;
 		PC_Frame_Index = frame_index;
 		
-		for(int i=0;i<DISK.Program_Segment_Length;i++)
+		for(int i=0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 		{
 			
 			if(LOADER.pcb.smt[0].pmt.get(i).frame_no== PC_Frame_Number)
@@ -376,7 +376,7 @@ public class LOADER extends SYSTEM {
 			
 			int temporary_page_index =0;
 			int temporary_frame_index = fmbv_replaced_index *8;
-			for(int i =0;i<DISK.Program_Segment_Length;i++)
+			for(int i =0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 			{
 				if(LOADER.pcb.smt[0].pmt.get(i).frame_no == fmbv_replaced_index)
 				{
@@ -409,7 +409,7 @@ public class LOADER extends SYSTEM {
 		
 			
 			
-			for(int i=0;i<DISK.Program_Segment_Length;i++)
+			for(int i=0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 			{
 				
 				if(LOADER.pcb.smt[0].pmt.get(i).frame_no== EA_Frame_Number)
@@ -448,7 +448,7 @@ public class LOADER extends SYSTEM {
 			LOADER.pcb.smt[0].pmt.get(EA_Page_Number).valid_bit = 1;
 			LOADER.pcb.smt[0].pmt.get(EA_Page_Number).ref_bit = 0;
 			LOADER.pcb.smt[0].pmt.get(EA_Page_Number).dirty_bit = 0;
-			for(int i=0;i<DISK.Program_Segment_Length;i++)
+			for(int i=0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 			{
 				System.out.println("PMT Values:"+LOADER.pcb.smt[0].pmt.get(i).page_no+" "+LOADER.pcb.smt[0].pmt.get(i).frame_no+ " "+LOADER.pcb.smt[0].pmt.get(i).valid_bit+" "+LOADER.pcb.smt[0].pmt.get(i).ref_bit+" "+LOADER.pcb.smt[0].pmt.get(i).dirty_bit);
 			}
@@ -469,7 +469,7 @@ public class LOADER extends SYSTEM {
 		
 		int temporary_page_index =0;
 		int temporary_frame_index = fmbv_index *8;
-		for(int i =0;i<DISK.Program_Segment_Length;i++)
+		for(int i =0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 		{
 			if(LOADER.pcb.smt[0].pmt.get(i).frame_no == frame_number)
 			{
@@ -501,7 +501,7 @@ public class LOADER extends SYSTEM {
 		
 		EA_Frame_Number = frame_number;
 		EA_Frame_Index = frame_index;
-		for(int i=0;i<DISK.Program_Segment_Length;i++)
+		for(int i=0;i<INPUT_SPOOLING.Program_Segment_Length;i++)
 		{
 			
 			if(LOADER.pcb.smt[0].pmt.get(i).frame_no== EA_Frame_Number)
@@ -638,7 +638,7 @@ public class LOADER extends SYSTEM {
 		else{
 			
 			
-			System.out.println("hi");
+			System.out.println("page replacemnt of instruction");
 		
 			for(int j=0; j< pagesInMemory.size();j++)
 				
@@ -650,8 +650,77 @@ public class LOADER extends SYSTEM {
 					
 					
 					
-					if (pagesInMemory.get(j)> DISK.Program_Segment_Length-1)
+					if (pagesInMemory.get(j)> INPUT_SPOOLING.Program_Segment_Length-1 )
 					{
+						
+						
+						
+						
+						
+						
+						
+						if(pagesInMemory.get(j)>INPUT_SPOOLING.Program_Segment_Length-1+INPUT_SPOOLING.Input_Words)
+							
+							
+						{
+							
+							int frame_value2= LOADER.pcb.smt[2].pmt.get(pagesInMemory.get(j)-INPUT_SPOOLING.Program_Segment_Length).frame_no;
+							
+							LOADER.pcb.smt[0].pmt.get(PC_Page_Number).frame_no= frame_value2;
+							LOADER.pcb.smt[2].pmt.get(pagesInMemory.get(j)-INPUT_SPOOLING.Program_Segment_Length).frame_no=-1;
+							
+							
+							
+							
+							
+							
+							
+							//copy to disk
+							
+							int diskAddress1;
+							int memoryAddress2;
+							
+							diskAddress1= pagesInMemory.get(j)*8;
+							memoryAddress2= frame_value2*8;
+							
+							for(int i=0; i<8;i++)
+							{
+								DISK.DISK[diskAddress1]= MEMORY.MEM[memoryAddress2]; 
+								memoryAddress2++;
+								diskAddress1++;
+							}
+							
+							
+							
+							memoryAddress= frame_value2*8;
+							diskAddress= PC_Page_Number*8;
+							
+							//copy to memory
+							for(int i=0; i<8;i++)
+							{
+								MEMORY.MEM[memoryAddress]= DISK.DISK[diskAddress]; 
+								memoryAddress++;
+								diskAddress++;
+							}
+							
+							//EA_Frame_Number= frame_value;
+							pagesInMemory.remove(j);
+							pagesInMemory.add(PC_Page_Number);
+							PC_Frame_Number = frame_value2;
+								
+							
+							
+							
+							
+							
+							
+						}
+						
+						
+						
+						
+					else
+						{	
 						int frame_value2= LOADER.pcb.smt[1].pmt.get(0).frame_no;
 						
 						LOADER.pcb.smt[0].pmt.get(PC_Page_Number).frame_no= frame_value2;
@@ -701,7 +770,7 @@ public class LOADER extends SYSTEM {
 						
 						
 						
-						
+					}
 					}
 					
 					
@@ -726,6 +795,16 @@ public class LOADER extends SYSTEM {
 				
 				
 				{	
+					
+					
+					
+					
+					
+					
+					
+					
+					{
+					
 					//get frame nuber of first page of pages of memory
 					int frame_value= LOADER.pcb.smt[0].pmt.get(pagesInMemory.get(j)).frame_no;
 					// assign the frame number to PC_Page number
@@ -774,6 +853,11 @@ public class LOADER extends SYSTEM {
 					
 					
 					
+					
+					
+					
+					
+				}
 					
 					
 					

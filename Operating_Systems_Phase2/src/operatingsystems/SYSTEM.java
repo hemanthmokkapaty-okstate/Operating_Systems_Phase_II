@@ -243,16 +243,22 @@ public class SYSTEM {
 		 }
 	//Main Method
 	public static void main(String[] args) {
-        FileName = "/Users/hemanth/Desktop/Encryption_hexa2.txt";
+        FileName = "/Users/hemanth/Desktop/nnumbersnegative.txt";
         DISK disk = new DISK();
-        disk.openFile();
-        disk.ReadFile();
-        disk.closeFile();
-        disk.variableLoading();
-        disk.HexLoad();
-        disk.Segment_Loading();
-        disk.Input_Spooling();
-        disk.Disk_Segmenting();
+        
+        INPUT_SPOOLING inputspooling = new INPUT_SPOOLING();
+        inputspooling.openFile();
+        inputspooling.ReadFile();
+        inputspooling.closeFile();
+        inputspooling.Disk_Segmenting();
+        //disk.openFile();
+        //disk.ReadFile();
+        //disk.closeFile();
+        //disk.variableLoading();
+        //disk.HexLoad();
+        //disk.Segment_Loading();
+        //disk.Input_Spooling();
+        //disk.Disk_Segmenting();
         LOADER loader = new LOADER();
 		// TODO Auto-generated method stub
 	

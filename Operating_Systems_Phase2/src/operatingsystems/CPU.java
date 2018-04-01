@@ -49,10 +49,6 @@ public static void CPU(int X,int Y)
 	System.out.println("No of Instructions Executed:"+(CPU_Count=CPU_Count+1));
 	System.out.println("PC Value:"+PC);
 	
-	
-	
-	
-	
  boolean page_fault_PC = true; 
  boolean page_fault_EA = true; 
  
@@ -66,6 +62,7 @@ public static void CPU(int X,int Y)
 	 LOADER.pagefault_PC(PC);
 	 
  }
+ PC_Frame_Number = LOADER.pcb.smt[0].pmt.get(PC/8).frame_no;
  X = (LOADER.PC_Frame_Number*8) + (PC%8);
  
  /*
@@ -760,12 +757,14 @@ public static void ZERO_RD()
 	{
 		ERROR_HANDLER.ERROR(3);
 	}
-	int Input_Dec = Integer.parseInt(Input);
+	//int Input_Dec = Integer.parseInt(Input);
 	//Checks whether the input is within the range or not
+	/*
 	if(Input_Dec<(-8192)||Input_Dec>(8192))
 	{
 		ERROR_HANDLER.ERROR(4);
 	}
+	*/
 	String Bin_Input = Input;
 	TOS = TOS+1;
 	Stack[TOS] = Bin_Input;
