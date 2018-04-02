@@ -783,9 +783,11 @@ public static void ZERO_WR()
 	Output_Disk_Address++;
 	TOS = TOS-1;
 	try{printtrace();}
-	catch(Exception e){	
+	catch(Exception e){
+		
 	}
 	CPU(PC,Trace_Flag);
+	
 }
 
 //Method for Zero Address Return operation
