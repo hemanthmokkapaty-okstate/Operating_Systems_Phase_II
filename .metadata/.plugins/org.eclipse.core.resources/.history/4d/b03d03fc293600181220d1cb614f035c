@@ -49,7 +49,8 @@ public static void CPU(int X,int Y)
 	System.out.println("No of Instructions Executed:"+(CPU_Count=CPU_Count+1));
 	System.out.println("PC Value:"+PC);
 	
-
+// boolean page_fault_PC = true; 
+ //boolean page_fault_EA = true; 
  
  
  
@@ -119,18 +120,18 @@ public static void CPU(int X,int Y)
 		String first_half = Instruction_Register.substring(0,8);
 		//Checks whether the first half of the value belongs to Type 0 or not
 		
-		PC_Hex = Dec_to_Hex(PC);
-		IR_Hex = Bin_to_Hex(Instruction_Register);
-		BR_Hex = Dec_to_Hex(Base_Address);
-		trace_TOS_bef = Dec_to_Hex(TOS);
-		
+		//PC_Hex = Dec_to_Hex(PC);
+		//IR_Hex = Bin_to_Hex(Instruction_Register);
+		//BR_Hex = Dec_to_Hex(Base_Address);
+		//trace_TOS_bef = Dec_to_Hex(TOS);
+		/*
 		if(TOS==0){
 			trace_StackTOS_bef="    ";
 		}
 		else {
 			trace_StackTOS_bef= Bin_to_Hex(Stack[TOS]);
 		}
-		
+		*/
 		trace_EA_aft="  ";
 		trace_EA_bef="  ";
 		trace_MemEA_aft="    ";
@@ -301,22 +302,22 @@ public static void CPU(int X,int Y)
 			 
 		 }
 		Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
-        PC_Hex = Dec_to_Hex(PC);
-	    IR_Hex = Bin_to_Hex(Instruction_Register);
-		BR_Hex = Dec_to_Hex(Base_Address);
-		trace_TOS_bef = Dec_to_Hex(TOS);
-		
+        //PC_Hex = Dec_to_Hex(PC);
+	    //IR_Hex = Bin_to_Hex(Instruction_Register);
+		//BR_Hex = Dec_to_Hex(Base_Address);
+		//trace_TOS_bef = Dec_to_Hex(TOS);
+		/*
 		if(TOS==0){
 			trace_StackTOS_bef="    ";
 		}
 		else {
-			trace_StackTOS_bef= Bin_to_Hex(Stack[TOS]);
+			//trace_StackTOS_bef= Bin_to_Hex(Stack[TOS]);
 		}
-		
-		trace_EA_bef=Dec_to_Hex(Effective_Address_By_Frame);
-		trace_MemEA_bef = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
-		trace_EA_aft=Dec_to_Hex(Effective_Address_By_Frame);
-		trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
+		*/
+		//trace_EA_bef=Dec_to_Hex(Effective_Address);
+		//trace_MemEA_bef = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
+		//trace_EA_aft=Dec_to_Hex(Effective_Address);
+		//trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
 		
 		//Initialize the opcode
 		Op_Code= Instruction_Register.substring(1,6);
@@ -402,19 +403,19 @@ public static void CPU(int X,int Y)
 			ERROR_HANDLER.ERROR(5);
 		}
 		
-		trace_EA_aft= Dec_to_Hex(Effective_Address_By_Frame);
-		trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
-		trace_TOS_aft= Dec_to_Hex(TOS);
-		
+		//trace_EA_aft= Dec_to_Hex(Effective_Address);
+		//trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);
+		//trace_TOS_aft= Dec_to_Hex(TOS);
+		/*
 		if(TOS==0){trace_StackTOS_aft ="    ";}
 		else {
 			trace_StackTOS_aft = Bin_to_Hex(Stack[TOS]);
 		}
-		
-		trace_TOS_aft = Dec_to_Hex(TOS);
-		 trace_StackTOS_aft = Bin_to_Hex(Stack[TOS]);
-		 trace_EA_aft = Dec_to_Hex(Effective_Address_By_Frame);
-		 trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);	
+		*/
+		//trace_TOS_aft = Dec_to_Hex(TOS);
+		 //trace_StackTOS_aft = Bin_to_Hex(Stack[TOS]);
+		 //trace_EA_aft = Dec_to_Hex(Effective_Address);
+		 //trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);	
 	}
 	
 	

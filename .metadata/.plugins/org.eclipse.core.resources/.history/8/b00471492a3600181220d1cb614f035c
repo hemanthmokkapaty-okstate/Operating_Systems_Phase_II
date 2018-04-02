@@ -313,9 +313,9 @@ public static void CPU(int X,int Y)
 			trace_StackTOS_bef= Bin_to_Hex(Stack[TOS]);
 		}
 		
-		trace_EA_bef=Dec_to_Hex(Effective_Address_By_Frame);
+		trace_EA_bef=Dec_to_Hex(Effective_Address);
 		trace_MemEA_bef = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
-		trace_EA_aft=Dec_to_Hex(Effective_Address_By_Frame);
+		trace_EA_aft=Dec_to_Hex(Effective_Address);
 		trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
 		
 		//Initialize the opcode
@@ -402,8 +402,8 @@ public static void CPU(int X,int Y)
 			ERROR_HANDLER.ERROR(5);
 		}
 		
-		trace_EA_aft= Dec_to_Hex(Effective_Address_By_Frame);
-		trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);
+		trace_EA_aft= Dec_to_Hex(Effective_Address);
+		trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);
 		trace_TOS_aft= Dec_to_Hex(TOS);
 		
 		if(TOS==0){trace_StackTOS_aft ="    ";}
@@ -413,8 +413,8 @@ public static void CPU(int X,int Y)
 		
 		trace_TOS_aft = Dec_to_Hex(TOS);
 		 trace_StackTOS_aft = Bin_to_Hex(Stack[TOS]);
-		 trace_EA_aft = Dec_to_Hex(Effective_Address_By_Frame);
-		 trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address_By_Frame]);	
+		 trace_EA_aft = Dec_to_Hex(Effective_Address);
+		 trace_MemEA_aft = Bin_to_Hex(MEMORY.MEM[Effective_Address]);	
 	}
 	
 	
