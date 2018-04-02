@@ -49,8 +49,8 @@ public static void CPU(int X,int Y)
 	System.out.println("No of Instructions Executed:"+(CPU_Count=CPU_Count+1));
 	System.out.println("PC Value:"+PC);
 	
- boolean page_fault_PC = true; 
- boolean page_fault_EA = true; 
+// boolean page_fault_PC = true; 
+ //boolean page_fault_EA = true; 
  
  
  
@@ -65,24 +65,7 @@ public static void CPU(int X,int Y)
  PC_Frame_Number = LOADER.pcb.smt[0].pmt.get(PC/8).frame_no;
  X = (LOADER.PC_Frame_Number*8) + (PC%8);
  
- /*
-	for(int pmt_index=0;pmt_index<DISK.Program_Segment_Length;pmt_index++)
-	{
-		
-		if(LOADER.pcb.smt[0].pmt.get(pmt_index).page_no == (PC/8) && LOADER.pcb.smt[0].pmt.get(pmt_index).frame_no!=- 1)
-		{
-			page_fault_PC = false;
-		}
-		
-	}
-	
-	if(page_fault_PC == true)
-	{
-		LOADER.Page_Fault_Handling_PC(PC);
-		X = (LOADER.PC_Frame_Number*8) + (PC%8);
-	}
-	
-	*/
+ 
 	 try  {
 		 if(Trace_Flag==1){
 			 File f= new File(trace_file);
@@ -171,6 +154,21 @@ public static void CPU(int X,int Y)
 				IO_Clock = IO_Clock+15;
 				System.out.println(Stack[TOS]);
 				Output = Stack[TOS];
+				
+				if(LOADER.pcb.smt[2].pmt.get(0).frame_no == -1)
+				{
+					LOADER.Output_Segment_Fault(Output_Disk_Address,Output);
+					MEMORY.MEM[Output_Memory_Address] = Output;
+					Output_Memory_Address++;	
+				}
+				else
+				{
+					MEMORY.MEM[Output_Memory_Address] = Output;
+					Output_Memory_Address++;	
+				}
+				
+				//LOADER.Output_Segment_Fault(Output_Disk_Address,Output);
+				Output_Disk_Address++;
 				TOS = TOS-1;
 				ZERO_WR();
 				CPU(PC,Trace_Flag);
@@ -270,7 +268,7 @@ public static void CPU(int X,int Y)
 				
 		}
 		
-		System.out.println("in Zero"+Y);
+		
 		
 	}
 	//Checks whether the instructions belong to type 1 or not
@@ -294,21 +292,7 @@ public static void CPU(int X,int Y)
 			Effective_Address = d_address + Stack_Value;
 			
 		}
-		/*
-		for(int i=0;i<DISK.Program_Segment_Length;i++)
-		{
-
-			if(LOADER.pcb.smt[0].pmt.get(i).page_no == (Effective_Address/8) && LOADER.pcb.smt[0].pmt.get(i).valid_bit == 1)
-			{
-				page_fault_EA = false;
-			}
-		}
-		if(page_fault_EA == true)
-		{
-			LOADER.Page_Fault_Handling_EA(Effective_Address);
-			Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
-		}
-		*/
+		
 
 		 if (LOADER.pcb.smt[0].pmt.get(Effective_Address/8).frame_no==- 1)
 			 
@@ -318,8 +302,8 @@ public static void CPU(int X,int Y)
 			 
 		 }
 		Effective_Address_By_Frame = LOADER.New_Calculated_Address(Effective_Address);
-//		PC_Hex = Dec_to_Hex(PC);
-	//	IR_Hex = Bin_to_Hex(Instruction_Register);
+        //PC_Hex = Dec_to_Hex(PC);
+	    //IR_Hex = Bin_to_Hex(Instruction_Register);
 		//BR_Hex = Dec_to_Hex(Base_Address);
 		//trace_TOS_bef = Dec_to_Hex(TOS);
 		/*
@@ -784,6 +768,19 @@ public static void ZERO_WR()
 	PC=PC+1;
 	System.out.println(Stack[TOS]);
 	Output=Stack[TOS];
+	//LOADER.Output_Segment_Fault(Output_Disk_Address, Output);
+	if(LOADER.pcb.smt[2].pmt.get(0).frame_no == -1)
+	{
+		LOADER.Output_Segment_Fault(Output_Disk_Address,Output);
+		MEMORY.MEM[Output_Memory_Address] = Output;
+		Output_Memory_Address++;	
+	}
+	else
+	{
+		MEMORY.MEM[Output_Memory_Address] = Output;
+		Output_Memory_Address++;	
+	}
+	Output_Disk_Address++;
 	TOS = TOS-1;
 	try{printtrace();}
 	catch(Exception e){

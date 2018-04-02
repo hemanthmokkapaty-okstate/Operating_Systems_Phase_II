@@ -128,7 +128,7 @@ public static void Disk_Segmenting()
 	
 	Input_Start_Index = (8*Program_Segment_Length);
 	Output_Start_Index = Input_Start_Index +8;
-	
+	Output_Disk_Address = Output_Start_Index;
 	System.out.println("Input Start:"+Input_Start_Index);
 	System.out.println("Output Start:"+Output_Start_Index);
 	
