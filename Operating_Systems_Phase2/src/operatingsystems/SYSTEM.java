@@ -57,6 +57,17 @@ public class SYSTEM {
 	public static int System_Clock = 0;
 	public static int IO_Clock =0;
 	public static int Final_Clock =0;
+	public static int VtuClock =0;
+	public static float Memory_Numerator=0;
+	public static float Memory_Denominator=256;
+	public static float Memory_Frames_Used=0;
+	public static float Memory_Frames_Available=32;
+	public static float Disk_Numerator=0;
+	public static float Disk_Denominator=2048;
+	public static float Disk_Frames_Used=0;
+	public static float Disk_Frames_Available=256;
+	public static int Memory_Fragmentation =0;
+	public static float Disk_Fragmentation =0;
 	public static String Output;
 	public static String outfile = "output.txt";
 	public static String trace_file = "tracefile.txt";
@@ -254,6 +265,11 @@ public class SYSTEM {
 	//Main Method
 	public static void main(String[] args) {
         FileName = "/Users/hemanth/Desktop/Error_Jobs_2/Encryption_hexa2.txt";
+        File out = new File(outfile);
+        if(out.exists())
+        {
+        	out.delete();
+        }
         DISK disk = new DISK();
         
         INPUT_SPOOLING inputspooling = new INPUT_SPOOLING();

@@ -33,7 +33,7 @@ public class LOADER extends SYSTEM {
 	}
 	public static void First_Page_Loading()
 	{
-		//Page_Faults++;
+		
 		if(PC<8)
 		{
 			First_Page_Number = 0;
@@ -170,6 +170,7 @@ public class LOADER extends SYSTEM {
 		else{
 			Page_Faults++;
 			Page_Fault_Clock = Page_Fault_Clock + 10;
+			VtuClock = VtuClock +10;
 			System.out.println("page replacemnt of instruction");
 		
 			for(int j=0; j< pagesInMemory.size();j++)
@@ -306,7 +307,7 @@ public class LOADER extends SYSTEM {
 			}
 			
 		}
-		OUTPUT_SPOOLING.VtuPrint();
+		
 	}
 	
 public static void pagefaut_EA(int address)
@@ -314,6 +315,7 @@ public static void pagefaut_EA(int address)
 {
 	Page_Faults++;
 	Page_Fault_Clock = Page_Fault_Clock + 10;
+	VtuClock = VtuClock +10;
 	PC_Page_Replacement = address;
 	int page_number = (address/8);
 	PC_Page_Number = page_number; 
@@ -402,12 +404,14 @@ public static void pagefaut_EA(int address)
 			}
 		}
 	}
+	
 }
 
 public static void Output_Segment_Fault(int address, String output)
 {
 	Page_Faults++;
 	Segment_Fault_Clock = Segment_Fault_Clock +5;
+	VtuClock = VtuClock +5;
 	PC_Page_Replacement = address;
 	int page_number = (address/8);
 	PC_Page_Number = page_number; 
@@ -514,8 +518,6 @@ public static void Output_Segment_Fault(int address, String output)
 		
 		
 	}
-	
-	
 	
 }
 

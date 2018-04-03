@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class OUTPUT_SPOOLING extends SYSTEM
 {
-
+	
 	OUTPUT_SPOOLING()
 	{
 		
@@ -44,7 +44,7 @@ public class OUTPUT_SPOOLING extends SYSTEM
 			   sclock = Integer.toHexString(totalclock);
 			   b.write("Clock value at termination: " + sclock+" (HEX)");
 			   b.newLine();
-			   b.write("Run time for the job");
+			   b.write("Run time for the job:"+(sysclock+pageclock+segmentclock) +"(DECIMAL)");
 			   b.newLine();
 			   b.write("Execution time: " + (sysclock-ioclock) + "(DECIMAL)");
 			   b.newLine();
@@ -54,21 +54,44 @@ public class OUTPUT_SPOOLING extends SYSTEM
 			   b.newLine();
 			   b.write("Segment fault handling time: " + segmentclock + "(DECIMAL)");
 			   b.newLine();
-			   b.write("Memory Utilization:");
+			   b.write("Memory Utilization(WORDS):");
 			   b.newLine();
-			   b.write("Ratio:");
+			   int num_mem = (int)Memory_Numerator;
+			   int dec_mem = (int)Memory_Denominator;
+			   
+			   
+			   b.write("Ratio:"+ num_mem+":"+dec_mem);
 			   b.newLine();
-			   b.write("Percentage:");
+			   b.write("Percentage:"+((Memory_Numerator/Memory_Denominator)*100)+"%");
 			   b.newLine();
-			   b.write("DISK Utilization:");
+			   b.write("Memory Utilization(FRAMES):");
 			   b.newLine();
-			   b.write("Ratio:");
+			   int num_mem_frame = (int)Memory_Frames_Used;
+			   int dec_mem_frame = (int)Memory_Frames_Available;
+			   b.write("Ratio:"+ num_mem_frame+":"+dec_mem_frame);
 			   b.newLine();
-			   b.write("Percentage:");
+			   b.write("Percentage:"+((Memory_Frames_Used/Memory_Frames_Available)*100)+"%");
 			   b.newLine();
-			   b.write("Memory Fragmentation:");
+			   b.write("DISK Utilization(WORDS):");
 			   b.newLine();
-			   b.write("DISK Fragmentation:");
+			   int num_disk = (int)Disk_Numerator;
+			   int dec_disk = (int)Disk_Denominator;
+			   b.write("Ratio:"+ num_disk+":"+dec_disk);
+			   b.newLine();
+			   b.write("Percentage:"+((Disk_Numerator/Disk_Denominator)*100)+"%");
+			   b.newLine();
+			   b.write("DISK Utilization(FRAMES):");
+			   b.newLine();
+			   int num_disk_frame = (int)Disk_Frames_Used;
+			   int dec_disk_frame = (int)Disk_Frames_Available;
+			   b.write("Ratio:"+num_disk_frame+":"+dec_disk_frame);
+			   b.newLine();
+			   b.write("Percentage:"+((Disk_Frames_Used/Disk_Frames_Available)*100)+"%");
+			   b.newLine();
+			   
+			   b.write("Memory Fragmentation:"+Memory_Fragmentation );
+			   b.newLine();
+			   b.write("DISK Fragmentation:"+Disk_Fragmentation);
 			   b.newLine();
 			   b.close();
 			  } catch (IOException e) {
@@ -77,19 +100,38 @@ public class OUTPUT_SPOOLING extends SYSTEM
 	}
 	
 	
-	public static void VtuPrint()
-	{
-		try(BufferedWriter b = new BufferedWriter(new FileWriter(outfile,true)))
-		{
-			b.write("Page fault called here");
-					
+	public static void VtuPrint() {
+		try (BufferedWriter b = new BufferedWriter(new FileWriter(outfile, true))) {
+			b.write("Program Map table");
+			b.newLine();
+			for (int i = 0; i < INPUT_SPOOLING.Program_Segment_Length; i++) {
+				if (LOADER.pcb.smt[0].pmt.get(i).frame_no != -1) {
+					b.write("PageNo:" + LOADER.pcb.smt[0].pmt.get(i).page_no + "  " + "FrameNo:"
+							+ LOADER.pcb.smt[0].pmt.get(i).frame_no);
+					b.newLine();
+				}
+			}
+			b.newLine();
+			if (LOADER.pcb.smt[1].pmt.get(0).frame_no != -1) {
+				b.write("Input Segment Map table");
+				b.newLine();
+				b.write("PageNo:" + LOADER.pcb.smt[1].pmt.get(0).page_no + "  " + "FrameNo:"
+						+ LOADER.pcb.smt[1].pmt.get(0).frame_no);
+				b.newLine();
+			}
+			b.newLine();
+			if (LOADER.pcb.smt[2].pmt.get(0).frame_no != -1) {
+				b.write("Output Segment Map table");
+				b.newLine();
+				b.write("PageNo:" + LOADER.pcb.smt[2].pmt.get(0).page_no + "  " + "FrameNo:"
+						+ LOADER.pcb.smt[2].pmt.get(0).frame_no);
+				b.newLine();
+			}
+			b.write("\n");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		catch (IOException e) {
-			   e.printStackTrace();
-			  }
 	}
-	
-	
 	
 	
 }

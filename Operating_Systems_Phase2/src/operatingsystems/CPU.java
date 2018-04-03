@@ -56,7 +56,11 @@ public static void CPU(int X,int Y)
 
  Final_Clock = System_Clock + LOADER.Page_Fault_Clock + LOADER.Segment_Fault_Clock ;
  
- 
+ if(VtuClock>15)
+ {
+	 OUTPUT_SPOOLING.VtuPrint();
+	 VtuClock = 0;
+ }
  
  if (LOADER.pcb.smt[0].pmt.get(PC/8).frame_no==- 1)
 	 
@@ -120,6 +124,7 @@ public static void CPU(int X,int Y)
 	{
 		//Incrementing the system clock
 		System_Clock = System_Clock + 1;
+		VtuClock = VtuClock +1;
 		String first_half = Instruction_Register.substring(0,8);
 		//Checks whether the first half of the value belongs to Type 0 or not
 		
@@ -155,6 +160,7 @@ public static void CPU(int X,int Y)
 			else if(Op_Code.equals("10100"))
 			{
 				IO_Clock = IO_Clock+15;
+				VtuClock = VtuClock+15;
 				System.out.println(Stack[TOS]);
 				Output = Stack[TOS];
 				Output_Segment_Words.add(Output);
@@ -278,6 +284,7 @@ public static void CPU(int X,int Y)
 	else if(Instruction_Type_T.equals("1"))
 	{
 		System_Clock = System_Clock + 4;
+		VtuClock = VtuClock +4;
 		Unused = Instruction_Register.substring(7,9);
 		Displacement_Address = Instruction_Register.substring(9,16);	
 		Index_bit = Instruction_Register.substring(6,7);
@@ -733,6 +740,7 @@ public static void ZERO_RD()
 {
 	System_Clock = System_Clock +17;
 	IO_Clock = IO_Clock+15;
+	VtuClock = VtuClock +17;
 	//LOADER.Input_Loading();
 	//Scanner scanner = new Scanner(System.in); 
 	//Takes the input from the Keyboard
@@ -769,6 +777,7 @@ public static void ZERO_WR()
 {
 	System_Clock = System_Clock +17;
 	IO_Clock = IO_Clock+15;
+	VtuClock = VtuClock +17;
 	PC=PC+1;
 	System.out.println(Stack[TOS]);
 	Output=Stack[TOS];
@@ -821,9 +830,12 @@ public static void ZERO_POP()
 public static void ZERO_HLT()
 {
 	//output(Job_Id,System_Clock,IO_Clock,Output);
+	MEMORY.MemoryUtilization();
+	DISK.DiskUtilization();
 	OUTPUT_SPOOLING.OUTPUT_SPOOLING(Job_Id,System_Clock , IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, Output);
 	System.out.println("No of Page Faults:"+Page_Faults);
 	System.out.println("Total clock:"+(System_Clock + LOADER.Page_Fault_Clock + LOADER.Segment_Fault_Clock));
+	
 	try{printtrace();}
 	catch(Exception e){
 		

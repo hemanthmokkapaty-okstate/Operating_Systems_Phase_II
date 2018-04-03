@@ -1,4 +1,187 @@
-Page fault called herePage fault called herePage fault called herePage fault called hereCumulative Job Identification number :1(DEC)
+Program Map table
+PageNo:1  FrameNo:5
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:1  FrameNo:5
+PageNo:5  FrameNo:10
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:1  FrameNo:5
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:1  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+Input Segment Map table
+PageNo:9  FrameNo:8
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:1  FrameNo:8
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:1  FrameNo:8
+PageNo:2  FrameNo:20
+PageNo:4  FrameNo:17
+PageNo:5  FrameNo:10
+PageNo:6  FrameNo:31
+
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:1  FrameNo:8
+PageNo:2  FrameNo:20
+PageNo:3  FrameNo:10
+PageNo:5  FrameNo:17
+PageNo:6  FrameNo:31
+
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:1  FrameNo:8
+PageNo:2  FrameNo:20
+PageNo:3  FrameNo:10
+PageNo:5  FrameNo:17
+PageNo:6  FrameNo:31
+
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:1  FrameNo:8
+PageNo:3  FrameNo:10
+PageNo:4  FrameNo:20
+PageNo:5  FrameNo:17
+PageNo:6  FrameNo:31
+
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:1  FrameNo:8
+PageNo:3  FrameNo:10
+PageNo:4  FrameNo:20
+PageNo:5  FrameNo:17
+PageNo:6  FrameNo:31
+
+
+
+Program Map table
+PageNo:0  FrameNo:5
+PageNo:1  FrameNo:8
+PageNo:3  FrameNo:10
+PageNo:4  FrameNo:20
+PageNo:5  FrameNo:17
+
+
+Output Segment Map table
+PageNo:10  FrameNo:31
+
+Cumulative Job Identification number :1(DEC)
 Nature of termination : Normal
 Input Data Segment for Job Id 1 :
 0000000000000101(BIN)
@@ -6,16 +189,22 @@ Output Data Segment for Job Id 1 :
 0000000000000101(BIN)
 0011111110101010(BIN)
 Clock value at termination: 14f (HEX)
-Run time for the job
+Run time for the job:335(DECIMAL)
 Execution time: 200(DECIMAL)
 Input/output time: 45(DECIMAL)
 Page fault handling time: 80(DECIMAL)
 Segment fault handling time: 10(DECIMAL)
-Memory Utilization:
-Ratio:
-Percentage:
-DISK Utilization:
-Ratio:
-Percentage:
-Memory Fragmentation:
-DISK Fragmentation:
+Memory Utilization(WORDS):
+Ratio:21:128
+Percentage:16.40625%
+Memory Utilization(FRAMES):
+Ratio:3:16
+Percentage:18.75%
+DISK Utilization(WORDS):
+Ratio:71:2048
+Percentage:3.4667969%
+DISK Utilization(FRAMES):
+Ratio:11:256
+Percentage:4.296875%
+Memory Fragmentation:6
+DISK Fragmentation:5.0
