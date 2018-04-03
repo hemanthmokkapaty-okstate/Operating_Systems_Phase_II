@@ -32,23 +32,60 @@ public void openFile()
 	}
 	catch(Exception e)
 	{
-		System.out.println("File not Found");
+		
 	}
 }	
-	
+
 public void ReadFile()
 {
 	boolean input_flag = false;
+	boolean Job_flag= false;
+	boolean Fin_flag = false;
 	int disk_index =0;
 	int input_line_no = 0;
+	int input_count=0;
+	int job_count =0;
+	int fin_count =0;
 	while(readLines.hasNext())
 	{
 		each_line = readLines.nextLine();
-		System.out.println("each_line:"+each_line);
-		linecount++;
+		if(each_line.contains("**INPUT"))
+		{
+			input_count++;
+		}
+		if(input_count>1)
+		{
+			ERROR_HANDLER.ERROR(11);
+		}
 		if(each_line.contains("**JOB"))
 		{
+			job_count++;
+		}
+		if(job_count>1)
+		{
+			ERROR_HANDLER.ERROR(15);
+		}
+		if(each_line.contains("**FIN"))
+		{
+			fin_count++;
+		}
+		if(fin_count>1)
+		{
+			ERROR_HANDLER.ERROR(16);
+		}
+		if(!each_line.contains("**INPUT"))
+		{
+			
+		}
+		System.out.println("each_line:"+each_line);
+		linecount++;
+		if(linecount==1)
+		{
 			String Job_line = each_line;
+			if(!Job_line.contains("**JOB"))
+			{
+				ERROR_HANDLER.ERROR(12);
+			}
 			String[] Job_line_values = Job_line.split("\\s+");
 			
 			if(!Job_line_values[1].matches("-?[0-9a-fA-F]+"))
@@ -62,6 +99,7 @@ public void ReadFile()
 			}
 			Input_Words = Hex_to_Dec(Job_line_values[1]);
 			Output_Words = Hex_to_Dec(Job_line_values[2]);
+			Job_flag = true;
 		}
 			
 		if(linecount ==2)
@@ -99,6 +137,10 @@ public void ReadFile()
 			{
 				ERROR_HANDLER.ERROR(103);
 			}
+			if(Trace_Flag!=1||Trace_Flag!=0)
+			{
+				ERROR_HANDLER.ERROR(107);
+			}
 			if(PC>Program_length)
 			{
 				ERROR_HANDLER.ERROR(2);
@@ -108,6 +150,10 @@ public void ReadFile()
 		
 		if(each_line.contains("**INPUT"))
 		{
+			if(each_line.length()>7)
+			{
+				ERROR_HANDLER.ERROR(11);
+			}
 			input_flag =true;
 			input_line_no = linecount +1; 
 		}
@@ -147,6 +193,10 @@ public void ReadFile()
 		if(input_line_no == linecount)
 		{
 			String inputline = each_line;
+			if(inputline.length()!=Input_Words*4)
+			{
+				ERROR_HANDLER.ERROR(17);
+			}
 			String first_word = Hex_to_Bin_8_bit(inputline.substring(0, 2));
 			String second_word = Hex_to_Bin_8_bit(inputline.substring(2,4));
 			String combined_binary_word = first_word + second_word ;
@@ -161,6 +211,20 @@ public void ReadFile()
 	{
 		ERROR_HANDLER.ERROR(105);
 
+	}
+	
+	if(input_flag ==false)
+	{
+		ERROR_HANDLER.ERROR(13);
+	}
+	
+	if(Job_flag ==false)
+	{
+		ERROR_HANDLER.ERROR(12);
+	}
+	if(fin_count ==0)
+	{
+		ERROR_HANDLER.ERROR(14);
 	}
 }
 

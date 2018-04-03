@@ -37,6 +37,8 @@ public static String BR_Hex = "    ";
 public static String IR_Hex = "    ";
 public static Boolean flag=true;
 public static int CPU_Count=0;
+public static int input_read_count =0;
+public static int output_write_count=0;
 public static ArrayList<String> Input_Segment_Words = new ArrayList<String>();
 public static ArrayList<String> Output_Segment_Words = new ArrayList<String>();
 
@@ -580,6 +582,10 @@ public static void ZERO_DIV()
 	PC = PC +1;
 	int top_stack = Bin_to_Dec(Stack[TOS]);
 	int top_stack1 = Bin_to_Dec(Stack[TOS-1]);
+	if(top_stack == 0)
+	{
+		ERROR_HANDLER.ERROR(20);
+	}
 	int div = (top_stack1/top_stack);
 	String add_bin = Dec_to_Bin_16_bit(div);
 	Stack[TOS-1] = add_bin;
@@ -738,6 +744,11 @@ public static void ZERO_CALL()
 //method for Zero Address RD Operation
 public static void ZERO_RD()
 {
+	input_read_count++;
+	if(input_read_count>INPUT_SPOOLING.Input_Words)
+	{
+		ERROR_HANDLER.ERROR(18);
+	}
 	System_Clock = System_Clock +17;
 	IO_Clock = IO_Clock+15;
 	VtuClock = VtuClock +17;
@@ -775,6 +786,11 @@ public static void ZERO_RD()
 //Method for Zero Address Write operation
 public static void ZERO_WR()
 {
+	output_write_count++;
+	if(output_write_count>INPUT_SPOOLING.Output_Words)
+	{
+		ERROR_HANDLER.ERROR(19);
+	}
 	System_Clock = System_Clock +17;
 	IO_Clock = IO_Clock+15;
 	VtuClock = VtuClock +17;

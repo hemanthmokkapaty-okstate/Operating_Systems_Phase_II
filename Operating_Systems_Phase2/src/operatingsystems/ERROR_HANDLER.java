@@ -28,44 +28,44 @@ public class ERROR_HANDLER extends SYSTEM {
 	     
 	    case 101:
 	    	message = "Input File not found";
-	    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 	    	System.exit(0);
 	      
 	      break;
 	     case 102:
 	    	 	message = "Invalid loader Format:Job Lines should not exceed 16 hex digits";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0);
 	      break;
 	     case 103:
 	    	 	message = "Invalid loader Format:Invalid Hex code in input";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0);
 	      
 	      break;
 	     case 104:
 	    	 	message = "Invalid base address(Should be 0 for the single batch)";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0);
 
 	      
 	      break;
 	     case 105:
 	    	 	message = "Length of the Input Job doesn't match the specified size";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0);
 		    	
 	      break;  
 	     case 106:
-	    	 	message = "Warning:Invalid Job Id: Should be 1 for the simple batch";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	//System.exit(0);
+	    	 	message = "Invalid Job Id: Should be 1 for the simple batch";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0);
 
 	      break; 
 	     case 107:
 	    	 	message = "Invalid Trace Flag";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0);
 
 	      break; 
 	      
@@ -76,81 +76,115 @@ public class ERROR_HANDLER extends SYSTEM {
 	    switch (err) {
 	     case 1:
 	    	 	message = "The length of one of the words is not equal to 4";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    System.exit(0);
-	     
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		   
+	    	 	System.exit(0);
 	      break;
 	     case 2:
 	    	 message = "PC value exceeds the length of the Program";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	 OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 System.exit(0);
 	      break;
 	     case 3:
-	    	 message = "Only Integer values are Allowed as Inputs";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	    message = "Invalid Input value(Only Integer values are Allowed as Inputs)";
+	    	    OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	    System.exit(0);
 	     
 	      break;
 	     case 4:
-	    	 	message = "Invalid Input value(Should be only decimals)v";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	 	message = "Invalid Input value(Should be only decimals)";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0);
 	     
 	      break;
 	     
 	     case 5:
 	    	 	message = "Invalid opcode";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0);
 	      
 	      break;
 	     case 6:
 	    	 	message = "Suspected Infinite Loop";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	System.exit(0); 
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);		    	
+	    	 	System.exit(0); 
 	      break;
 	     case 7:
 	    	 	message = "Effective Address Should not be greater than the Program length";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
 	      break;
 	     case 8:
 	    	 	message = "Illegal Instruction Trap ,Stack Overflow";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
 	      break;
 	     case 9:
 	    	 	message = "Illegal Instruction Trap ,Stack Underflow";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
 	      break;
 	      
 	     case 10:
 	    	 	message = "Invalid loader Format:Job Lines should not exceed 16 hex digits";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
 	      break; 
 	      
 	     case 11:
 	    	 	message = "More than 1 **Input";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
 	      break;
 	      
 	     case 12:
 	    	 	message = "Missing **JOB";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
 	      break;
 	     case 13:
 	    	 	message = "Missing **INPUT";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
 	      break;
 	     case 14:
 	    	 	message = "Missing **FIN";
-		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
 		    	System.exit(0); 
+	      break;
+	      
+	     case 15:
+	    	 	message = "More than 1 **JOB";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
+		    	System.exit(0); 
+	      break;
+	     case 16:
+	    	 	message = "More than 1 **FIN";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
+		    	System.exit(0); 
+	      break;
+	      
+	     case 17:
+	    	 	message = "Mismatch between the no of input words specified and no of Input words actually there";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
+		    	System.exit(0); 
+	      break;
+	      
+	     case 18:
+	    	 	message = "Reading Beyond the end of file(Input-data Segment)";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
+		    	System.exit(0); 
+	      break;
+	     case 19:
+	    	 	message = "Writing Beyond the end of file(Output-data Segment)";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
+		    	System.exit(0); 
+	      break;
+	     case 20:
+	    	 	message = "Divided by Zero Exception";
+	    	 	OUTPUT_SPOOLING.Spooling_Error(Job_Id, System_Clock, IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, message);
+		    	MEMORY.MemoryUtilization();
+		    	DISK.DiskUtilization();
+	    	 	System.exit(0); 
 	      break;
 	    }
 	   }
