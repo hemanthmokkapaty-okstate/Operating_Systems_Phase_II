@@ -56,6 +56,7 @@ public class SYSTEM {
 	public static String FileName;
 	public static int System_Clock = 0;
 	public static int IO_Clock =0;
+	public static int System_Clock = 0;
 	public static int Final_Clock =0;
 	public static String Output;
 	public static String outfile = "output.txt";

@@ -1,7 +1,21 @@
-Cumulative Job Identification number :1(DEC)
+Page fault called herePage fault called herePage fault called herePage fault called hereCumulative Job Identification number :1(DEC)
 Nature of termination : Normal
-Output of the Job : 0011111110101010(BINARY)
-Clock value at termination: f5 (HEX)virtual time units
+Input Data Segment for Job Id 1 :
+0000000000000101(BIN)
+Output Data Segment for Job Id 1 :
+0000000000000101(BIN)
+0011111110101010(BIN)
+Clock value at termination: 14f (HEX)
 Run time for the job
-Execution time: 200(DECIMAL)virtual time units
-Input/output time: 45(DECIMAL)virtual time units
+Execution time: 200(DECIMAL)
+Input/output time: 45(DECIMAL)
+Page fault handling time: 80(DECIMAL)
+Segment fault handling time: 10(DECIMAL)
+Memory Utilization:
+Ratio:
+Percentage:
+DISK Utilization:
+Ratio:
+Percentage:
+Memory Fragmentation:
+DISK Fragmentation:

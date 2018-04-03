@@ -54,7 +54,7 @@ public static void CPU(int X,int Y)
 	System.out.println("PC Value:"+PC);
 	
 
- Final_Clock = System_Clock + LOADER.Page_Fault_Clock + LOADER.Segment_Fault_Clock ;
+ Final_Clock = System_Clock + IO_Clock + LOADER.Page_Fault_Clock + LOADER.Segment_Fault_Clock ;
  
  
  
@@ -822,6 +822,7 @@ public static void ZERO_HLT()
 {
 	//output(Job_Id,System_Clock,IO_Clock,Output);
 	OUTPUT_SPOOLING.OUTPUT_SPOOLING(Job_Id,System_Clock , IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, Output);
+	OUTPUT_SPOOLING.filetest();
 	System.out.println("No of Page Faults:"+Page_Faults);
 	System.out.println("Total clock:"+(System_Clock + LOADER.Page_Fault_Clock + LOADER.Segment_Fault_Clock));
 	try{printtrace();}

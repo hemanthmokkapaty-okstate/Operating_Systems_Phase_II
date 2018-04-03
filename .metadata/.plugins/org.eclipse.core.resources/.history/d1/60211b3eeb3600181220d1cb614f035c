@@ -1,7 +1,5 @@
 package operatingsystems;
 
-import java.util.ArrayList;
-
 /*
 Description: The CPU subsystem is the central unit that processes the entire instructions.It will take the memory from the MEMORY subsystem 
 and finds out which type of instruction it belongs to. Once the instruction type is specified the CPU will process the instructions based on the 
@@ -37,8 +35,6 @@ public static String BR_Hex = "    ";
 public static String IR_Hex = "    ";
 public static Boolean flag=true;
 public static int CPU_Count=0;
-public static ArrayList<String> Input_Segment_Words = new ArrayList<String>();
-public static ArrayList<String> Output_Segment_Words = new ArrayList<String>();
 
 
 //Constructor for the CPU Class
@@ -54,7 +50,7 @@ public static void CPU(int X,int Y)
 	System.out.println("PC Value:"+PC);
 	
 
- Final_Clock = System_Clock + LOADER.Page_Fault_Clock + LOADER.Segment_Fault_Clock ;
+ 
  
  
  
@@ -157,7 +153,7 @@ public static void CPU(int X,int Y)
 				IO_Clock = IO_Clock+15;
 				System.out.println(Stack[TOS]);
 				Output = Stack[TOS];
-				Output_Segment_Words.add(Output);
+				
 				if(LOADER.pcb.smt[2].pmt.get(0).frame_no == -1)
 				{
 					LOADER.Output_Segment_Fault(Output_Disk_Address,Output);
@@ -738,7 +734,6 @@ public static void ZERO_RD()
 	//Takes the input from the Keyboard
 	//Input = scanner.nextLine();
 	Input = LOADER.Input_Loading();
-	Input_Segment_Words.add(Input);
 	System.out.println("Input value is:"+Input);
 	//Checks whether the Input is an integer or not
 	if(!Input.matches("(-?[0-9]+)"))
@@ -772,7 +767,6 @@ public static void ZERO_WR()
 	PC=PC+1;
 	System.out.println(Stack[TOS]);
 	Output=Stack[TOS];
-	Output_Segment_Words.add(Output);
 	//LOADER.Output_Segment_Fault(Output_Disk_Address, Output);
 	if(LOADER.pcb.smt[2].pmt.get(0).frame_no == -1)
 	{
@@ -821,9 +815,8 @@ public static void ZERO_POP()
 public static void ZERO_HLT()
 {
 	//output(Job_Id,System_Clock,IO_Clock,Output);
-	OUTPUT_SPOOLING.OUTPUT_SPOOLING(Job_Id,System_Clock , IO_Clock, LOADER.Page_Fault_Clock, LOADER.Segment_Fault_Clock, Output);
+	OUTPUT_SPOOLING.OUTPUT_SPOOLING(Job_Id,System_Clock , IO_Clock, 0, 0, Output);
 	System.out.println("No of Page Faults:"+Page_Faults);
-	System.out.println("Total clock:"+(System_Clock + LOADER.Page_Fault_Clock + LOADER.Segment_Fault_Clock));
 	try{printtrace();}
 	catch(Exception e){
 		

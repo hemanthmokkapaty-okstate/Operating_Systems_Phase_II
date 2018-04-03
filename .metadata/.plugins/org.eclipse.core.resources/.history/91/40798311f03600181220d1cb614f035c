@@ -22,8 +22,6 @@ public class LOADER extends SYSTEM {
 	public static PCB pcb = new PCB();
 	public static int PC_Page_Replacement;
 	public static int EA_Page_Replacement;
-	public static int Page_Fault_Clock=0;
-	public static int Segment_Fault_Clock=0;
 	public static String Temporary[] = new String[8];
 	
 	static ArrayList<Integer> pagesInMemory = new ArrayList();	
@@ -85,8 +83,7 @@ public class LOADER extends SYSTEM {
 	
 	public static String Input_Loading()
 	{
-	Page_Faults++;
-	Segment_Fault_Clock = Segment_Fault_Clock +5;
+		Page_Faults++;
 	int input_page_Index = INPUT_SPOOLING.Input_Start_Index;
 	int pageNumber1= input_page_Index/8;
 	int frame_Number = PCB.FreeFrames.get(0);
@@ -169,7 +166,6 @@ public class LOADER extends SYSTEM {
 		
 		else{
 			Page_Faults++;
-			Page_Fault_Clock = Page_Fault_Clock + 10;
 			System.out.println("page replacemnt of instruction");
 		
 			for(int j=0; j< pagesInMemory.size();j++)
@@ -306,14 +302,12 @@ public class LOADER extends SYSTEM {
 			}
 			
 		}
-		OUTPUT_SPOOLING.VtuPrint();
 	}
 	
 public static void pagefaut_EA(int address)
 	
 {
 	Page_Faults++;
-	Page_Fault_Clock = Page_Fault_Clock + 10;
 	PC_Page_Replacement = address;
 	int page_number = (address/8);
 	PC_Page_Number = page_number; 
@@ -407,7 +401,6 @@ public static void pagefaut_EA(int address)
 public static void Output_Segment_Fault(int address, String output)
 {
 	Page_Faults++;
-	Segment_Fault_Clock = Segment_Fault_Clock +5;
 	PC_Page_Replacement = address;
 	int page_number = (address/8);
 	PC_Page_Number = page_number; 

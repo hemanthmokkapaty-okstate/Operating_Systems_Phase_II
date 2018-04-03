@@ -306,7 +306,6 @@ public class LOADER extends SYSTEM {
 			}
 			
 		}
-		OUTPUT_SPOOLING.VtuPrint();
 	}
 	
 public static void pagefaut_EA(int address)
