@@ -7,8 +7,6 @@ package operatingsystems;
  ,Input Segment and Output Segment.
 */
 
-
-
 import java.io.*;
 import java.util.*;
 import java.util.Scanner;
@@ -17,52 +15,45 @@ import java.io.File;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+public class DISK extends SYSTEM {
+	// Creating a Disk Array of Size 8 times the size of the Main Memory
+	public static String[] DISK = new String[2048];
 
-
-public class DISK extends SYSTEM
-{
-//Creating a Disk Array of Size 8 times the size of the Main Memory	
-public static String[] DISK = new String[2048];
-
-public static int gcd(int p, int q) {
-    if (q == 0) return p;
-    else return gcd(q, p % q);
-}
-
-static void ratio_words(int a, int b) {
-	   final int gcd = gcd(a,b);
-	   Disk_Numerator = a/gcd;
-	   Disk_Denominator = b/gcd;
-	}
-static void ratio_frames(int a, int b) {
-	   final int gcd = gcd(a,b);
-	    //System.out.println(a/gcd + ":" + b/gcd);
-	   Disk_Frames_Used = a/gcd;
-	   Disk_Frames_Available = b/gcd;
+	// method to calculate the GCD
+	public static int gcd(int p, int q) {
+		if (q == 0)
+			return p;
+		else
+			return gcd(q, p % q);
 	}
 
+	// Method to calculate the ratio
+	static void ratio_words(int a, int b) {
+		final int gcd = gcd(a, b);
+		Disk_Numerator = a / gcd;
+		Disk_Denominator = b / gcd;
+	}
 
+	static void ratio_frames(int a, int b) {
+		final int gcd = gcd(a, b);
+		Disk_Frames_Used = a / gcd;
+		Disk_Frames_Available = b / gcd;
+	}
 
-public static void DiskUtilization()
-{
-	int word_count=0;
-	int last_word_index = INPUT_SPOOLING.Output_Start_Index +8;
-	int total_pages = INPUT_SPOOLING.Program_Segment_Length + 2;
-	for(int i=0;i<last_word_index;i++)
-	{
-		if(DISK[i]!=null)
-		{
-			word_count++;
+	// Method to calculate the Utilization ratio of the Disk
+	public static void DiskUtilization() {
+		int word_count = 0;
+		int last_word_index = INPUT_SPOOLING.Output_Start_Index + 8;
+		int total_pages = INPUT_SPOOLING.Program_Segment_Length + 2;
+		for (int i = 0; i < last_word_index; i++) {
+			if (DISK[i] != null) {
+				word_count++;
+			}
 		}
+		word_count = word_count + INPUT_SPOOLING.Output_Words;
+		ratio_words(word_count, 2048);
+		Disk_Fragmentation = ((total_pages * 8) / (total_pages * 8 - word_count));
+		ratio_frames(total_pages, 256);
 	}
-	 word_count = word_count + INPUT_SPOOLING.Output_Words;
-	System.out.println("No of disk words:"+word_count);
-	ratio_words(word_count,2048);
-	Disk_Fragmentation = ((total_pages*8)/(total_pages*8 - word_count));
-	ratio_frames(total_pages,256);
-}
-
-
-
 
 }

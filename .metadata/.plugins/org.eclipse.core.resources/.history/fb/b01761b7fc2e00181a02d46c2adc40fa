@@ -1,6 +1,0 @@
-package operatingsystems;
-
-public class PMT extends SYSTEM
-{
-
-}
