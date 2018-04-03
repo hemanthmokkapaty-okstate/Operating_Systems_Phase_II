@@ -31,6 +31,7 @@ public class LOADER extends SYSTEM {
 	}
 	public static void First_Page_Loading()
 	{
+		//Page_Faults++;
 		if(PC<8)
 		{
 			First_Page_Number = 0;
@@ -82,6 +83,7 @@ public class LOADER extends SYSTEM {
 	
 	public static String Input_Loading()
 	{
+		Page_Faults++;
 	int input_page_Index = INPUT_SPOOLING.Input_Start_Index;
 	int pageNumber1= input_page_Index/8;
 	int frame_Number = PCB.FreeFrames.get(0);
@@ -129,6 +131,7 @@ public class LOADER extends SYSTEM {
 	public static void pagefault_PC (int address)
 	
 	{
+		//Page_Faults++;
 		PC_Page_Replacement = address;
 		int page_number = (address/8);
 		PC_Page_Number = page_number; 
@@ -162,6 +165,7 @@ public class LOADER extends SYSTEM {
 		}
 		
 		else{
+			Page_Faults++;
 			System.out.println("page replacemnt of instruction");
 		
 			for(int j=0; j< pagesInMemory.size();j++)
@@ -303,6 +307,7 @@ public class LOADER extends SYSTEM {
 public static void pagefaut_EA(int address)
 	
 {
+	Page_Faults++;
 	PC_Page_Replacement = address;
 	int page_number = (address/8);
 	PC_Page_Number = page_number; 
@@ -337,7 +342,7 @@ public static void pagefaut_EA(int address)
 	
 	else{
 		
-	
+		//Page_Faults++;
 		for(int j=0; j< pagesInMemory.size();j++)
 			
 		{
@@ -395,7 +400,7 @@ public static void pagefaut_EA(int address)
 
 public static void Output_Segment_Fault(int address, String output)
 {
-	
+	Page_Faults++;
 	PC_Page_Replacement = address;
 	int page_number = (address/8);
 	PC_Page_Number = page_number; 

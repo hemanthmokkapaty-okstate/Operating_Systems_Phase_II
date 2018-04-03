@@ -44,25 +44,29 @@ public class ERROR_HANDLER extends SYSTEM {
 	      
 	      break;
 	     case 104:
-	    	 	message = "Invalid base address";
+	    	 	message = "Invalid base address(Should be 0 for the single batch)";
 		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	
+		    	System.exit(0);
+
 	      
 	      break;
 	     case 105:
 	    	 	message = "Length of the Input Job doesn't match the specified size";
 		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+		    	System.exit(0);
 		    	
 	      break;  
 	     case 106:
-	    	 	message = "Invalid Job Id: Should be 1 for the simple batch";
+	    	 	message = "Warning:Invalid Job Id: Should be 1 for the simple batch";
 		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    
+		    	//System.exit(0);
+
 	      break; 
 	     case 107:
 	    	 	message = "Invalid Trace Flag";
 		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
-		    	
+		    	System.exit(0);
+
 	      break; 
 	      
 	    }
@@ -88,7 +92,7 @@ public class ERROR_HANDLER extends SYSTEM {
 	     
 	      break;
 	     case 4:
-	    	 	message = "Input value exceeds the range";
+	    	 	message = "Invalid Input value(Should be only decimals)v";
 		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
 		    	System.exit(0);
 	     
@@ -117,6 +121,34 @@ public class ERROR_HANDLER extends SYSTEM {
 	      break;
 	     case 9:
 	    	 	message = "Illegal Instruction Trap ,Stack Underflow";
+		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+		    	System.exit(0); 
+	      break;
+	      
+	     case 10:
+	    	 	message = "Invalid loader Format:Job Lines should not exceed 16 hex digits";
+		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+		    	System.exit(0); 
+	      break; 
+	      
+	     case 11:
+	    	 	message = "More than 1 **Input";
+		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+		    	System.exit(0); 
+	      break;
+	      
+	     case 12:
+	    	 	message = "Missing **JOB";
+		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+		    	System.exit(0); 
+	      break;
+	     case 13:
+	    	 	message = "Missing **INPUT";
+		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
+		    	System.exit(0); 
+	      break;
+	     case 14:
+	    	 	message = "Missing **FIN";
 		    	outputerror(Job_Id,System_Clock,IO_Clock,message);
 		    	System.exit(0); 
 	      break;

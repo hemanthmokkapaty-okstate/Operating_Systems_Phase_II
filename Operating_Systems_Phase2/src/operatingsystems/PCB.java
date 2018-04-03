@@ -1,4 +1,9 @@
 package operatingsystems;
+/*
+ * PCB :Process Control Block or Process Context Block is used to represent every single job in the system.(Though
+ * we are using a single Job for Phase 2 it should also be represented by PCB).
+ */
+
 
 import java.io.*;
 import java.lang.*;
@@ -8,9 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
-
-
-
 
 public class PCB extends SYSTEM
 {	
@@ -29,8 +31,7 @@ public static boolean[] FMBV = new boolean[32];
 	public static void FMBV_Initialize()
 	{
 		FMBV[4] = true;
-		
-PCB.FreeFrames.add(5);		
+        PCB.FreeFrames.add(5);		
 		FMBV[7] = true;
 		PCB.FreeFrames.add(8);	
 		FMBV[9] = true;

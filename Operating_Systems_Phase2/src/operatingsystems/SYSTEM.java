@@ -59,6 +59,7 @@ public class SYSTEM {
 	public static String Output;
 	public static String outfile = "output.txt";
 	public static String trace_file = "tracefile.txt";
+	public static int Page_Faults=0;
 
 	
 	//Method to convert Hexadecimal number to Decimal number
@@ -82,6 +83,12 @@ public class SYSTEM {
 	//Method to convert Hexadecimal number to 8 bit Binary Number
 	public static String Hex_to_Bin_8_bit(String hex)
 	{
+	
+		if(!hex.matches("-?[0-9a-fA-F]+"))
+		{
+			ERROR_HANDLER.ERROR(103);
+		}	
+		
 	int decimal = Integer.parseInt(hex,16);    
 	String binary = Integer.toBinaryString(decimal);
 	//Pad 0's to make the length of the string to 8
@@ -245,7 +252,7 @@ public class SYSTEM {
 		 }
 	//Main Method
 	public static void main(String[] args) {
-        FileName = "/Users/hemanth/Desktop/nnumbersnegative.txt";
+        FileName = "/Users/hemanth/Desktop/Error_Jobs_2/Encryption_hexa2.txt";
         DISK disk = new DISK();
         
         INPUT_SPOOLING inputspooling = new INPUT_SPOOLING();
@@ -268,5 +275,6 @@ public class SYSTEM {
 		
 		CPU cpu = new CPU();
 		CPU.CPU(PC,Trace_Flag);
+		
 	}
 }

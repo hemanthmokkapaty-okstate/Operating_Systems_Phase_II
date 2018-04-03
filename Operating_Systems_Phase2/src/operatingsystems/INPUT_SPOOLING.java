@@ -21,6 +21,7 @@ public static int Program_Segment_Length;
 public static int Input_Start_Index;
 public static int Output_Start_Index;
 public static int Total_Pages;
+public static int line_count =0;
 
 	
 public void openFile()
@@ -49,6 +50,16 @@ public void ReadFile()
 		{
 			String Job_line = each_line;
 			String[] Job_line_values = Job_line.split("\\s+");
+			
+			if(!Job_line_values[1].matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(103);
+			}
+			
+			if(!Job_line_values[2].matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(103);
+			}
 			Input_Words = Hex_to_Dec(Job_line_values[1]);
 			Output_Words = Hex_to_Dec(Job_line_values[2]);
 		}
@@ -58,10 +69,41 @@ public void ReadFile()
 			String second_line = each_line;
 			String[] second_line_values = second_line.split("\\s+");
 			Job_Id = Hex_to_Dec(second_line_values[0]);
+			
+			if(!second_line_values[0].matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(4);
+			}
 			Base_Address = Hex_to_Dec(second_line_values[1]);
+			if(Base_Address!=0)
+			{
+				ERROR_HANDLER.ERROR(104);
+			}
+			if(!second_line_values[1].matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(103);
+			}
+			
 			PC = Hex_to_Dec(second_line_values[2]);
+			if(!second_line_values[2].matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(103);
+			}
 			Program_length = Hex_to_Dec(second_line_values[3]);
+			if(!second_line_values[3].matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(103);
+			}
 			Trace_Flag = Hex_to_Dec(second_line_values[4]);		
+			if(!second_line_values[4].matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(103);
+			}
+			if(PC>Program_length)
+			{
+				ERROR_HANDLER.ERROR(2);
+			}
+			
 		}
 		
 		if(each_line.contains("**INPUT"))
@@ -73,14 +115,24 @@ public void ReadFile()
 		
 		if(linecount!=1 && linecount!=2 && input_flag!=true)
 		{
+			line_count++;
 			int word_count=0;
+			
 			while(word_count<each_line.length())
 			{
+				if(each_line.length()>16)
+				{
+					ERROR_HANDLER.ERROR(10);
+				}
 				if(each_line.length()%4!=0)
 				{
 					ERROR_HANDLER.ERROR(1);
 				}
 			String each_word= each_line.substring(word_count,Math.min(word_count+4,each_line.length()));
+			if(!each_word.matches("-?[0-9a-fA-F]+"))
+			{
+				ERROR_HANDLER.ERROR(103);
+			}
 			word_count = word_count +4;
 			String first_word = Hex_to_Bin_8_bit(each_word.substring(0, 2));
 			String second_word = Hex_to_Bin_8_bit(each_word.substring(2,4));
@@ -88,6 +140,7 @@ public void ReadFile()
 			DISK.DISK[disk_index] = combined_binary_word;
 			disk_index++;
 			}
+			
 		}
 		
 		
@@ -102,7 +155,19 @@ public void ReadFile()
 		}
 		
 	}
+	System.out.println("line count:"+line_count);
+	
+	if(Program_length!=line_count*4)
+	{
+		ERROR_HANDLER.ERROR(105);
+
+	}
 }
+
+
+
+
+
 
 public static void closeFile()
 {

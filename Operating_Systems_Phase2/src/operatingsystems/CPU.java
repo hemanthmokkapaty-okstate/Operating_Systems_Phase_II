@@ -815,6 +815,7 @@ public static void ZERO_POP()
 public static void ZERO_HLT()
 {
 	output(Job_Id,System_Clock,IO_Clock,Output);
+	System.out.println("No of Page Faults:"+Page_Faults);
 	try{printtrace();}
 	catch(Exception e){
 		

@@ -1,7 +1,7 @@
 Cumulative Job Identification number :1(DEC)
 Nature of termination : Normal
-Output of the Job : 0000000000001111(BINARY)
-Clock value at termination: 5a (HEX)virtual time units
+Output of the Job : 0011111110101010(BINARY)
+Clock value at termination: f5 (HEX)virtual time units
 Run time for the job
-Execution time: 45(DECIMAL)virtual time units
+Execution time: 200(DECIMAL)virtual time units
 Input/output time: 45(DECIMAL)virtual time units
